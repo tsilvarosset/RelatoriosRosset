@@ -1,0 +1,97 @@
+﻿@model IEnumerable<RelatoriosRosset.Models.NotasDevFModel>
+@{
+    ViewData["Title"] = "Pesquisa de Notas";
+}
+
+<h2>Pesquisa de Notas</h2>
+
+<form asp-action="NotasDevF" method="get" class="mb-4">
+    <div class="row">
+        <div class="col-md-3">
+            <label for="dataInicio">Data Início</label>
+            <input type="date" name="dataInicio" class="form-control"
+                   value="@(ViewBag.DataInicio?.ToString("yyyy-MM-dd"))" />
+        </div>
+        <div class="col-md-3">
+            <label for="dataFim">Data Fim</label>
+            <input type="date" name="dataFim" class="form-control"
+                   value="@(ViewBag.DataFim?.ToString("yyyy-MM-dd"))" />
+        </div>
+        <div class="col-md-3">
+            <label for="clienteVarejo">Cliente Varejo</label>
+            <input type="text" name="clienteVarejo" class="form-control"
+                   value="@ViewBag.ClienteVarejo" />
+        </div>
+        <div class="col-md-3">
+            <label for="cpfCgc">CPF/CGC</label>
+            <input type="text" name="cpfCgc" class="form-control"
+                   value="@ViewBag.CpfCgc" />
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12 text-end">
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+
+            <a asp-action="ExportarExcel"
+               asp-route-dataInicio="@ViewBag.DataInicio?.ToString("yyyy-MM-dd")"
+               asp-route-dataFim="@ViewBag.DataFim?.ToString("yyyy-MM-dd")"
+               asp-route-clienteVarejo="@ViewBag.ClienteVarejo"
+               asp-route-cpfCgc="@ViewBag.CpfCgc"
+               class="btn btn-success">Gerar Relatório em Excel</a>
+        </div>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Filial</th>
+                <th>Número NF</th>
+                <th>Emissão</th>
+                <th>Valor Total</th>
+                <th>Natureza Operação</th>
+                <th>CPF/CNPJ</th>
+                <th>Cliente Varejo</th>
+                <th>Chave NFE</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var nota in Model)
+            {
+                <tr>
+                    <td>@nota.FILIAL</td>
+                    <td>@nota.NF_NUMERO</td>
+                    <td>@nota.EMISSAO.ToString("dd/MM/yyyy")</td>
+                    <td>@nota.VALOR_TOTAL.ToString("C", new System.Globalization.CultureInfo("pt-BR"))</td>
+                    <td>@nota.NATUREZA_OPERACAO_CODIGO</td>
+                    <td>@nota.CPF_CGC</td>
+                    <td>@nota.CLIENTE_VAREJO</td>
+                    <td>
+                        <a href="https://consultadanfe.com/?chave=@nota.CHAVE_NFE" target="_blank">@nota.CHAVE_NFE</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nenhuma nota encontrada para o período selecionado.</p>
+}
+
+@section Scripts {
+    <script>
+        // Opcional: Adicionar validação client-side para garantir que dataFim seja maior que dataInicio
+        document.querySelector('form').addEventListener('submit', function (e) {
+            const dataInicio = document.querySelector('[name="dataInicio"]').value;
+            const dataFim = document.querySelector('[name="dataFim"]').value;
+
+            if (dataInicio && dataFim && new Date(dataFim) < new Date(dataInicio)) {
+                e.preventDefault();
+                alert('A data final deve ser maior ou igual à data inicial.');
+            }
+        });
+    </script>
+}

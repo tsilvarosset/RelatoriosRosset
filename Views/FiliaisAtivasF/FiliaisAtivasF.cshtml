@@ -1,0 +1,38 @@
+﻿@model IEnumerable<RelatoriosRosset.Models.FiliaisAtivasFModel>
+@{
+    ViewData["Title"] = "Filiais Ativas";
+}
+
+<h2>Filiais Ativas</h2>
+
+<form asp-action="FiliaisAtivasF" method="get" class="mb-4">
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Filial</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loja in Model)
+            {
+                <tr>
+
+                    <td>@loja.Filial</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nenhuma loja encontrada.</p>
+}
+
+
+
+
