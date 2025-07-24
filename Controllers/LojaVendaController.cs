@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Packaging;
 using OfficeOpenXml;
 using RelatoriosRosset.Models;
 using System.ComponentModel;
 using System.Diagnostics;
-using LicenseContext = OfficeOpenXml.LicenseContext;
+using System.IO;
+//using LicenseContext = OfficeOpenXml.LicenseContext;
 
 namespace RelatoriosRosset.Controllers
 {
@@ -39,64 +42,67 @@ namespace RelatoriosRosset.Controllers
             return View(lojaVendas);
         }
         // GET: LojaVendas/ExportarExcel
+        
         public async Task<IActionResult> ExportarExcel(DateTime? dataInicio, DateTime? dataFim)
         {
-            // Configurar a licença do EPPlus para uso não comercial diretamente no código
-            //ExcelPackage.LicenseContext = new LicenseInfo { IsCommercial = false };
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
-            var query = _context.V_VENDAS_PROPRIAS.AsQueryable();
-
-            if (dataInicio.HasValue)
+            try
             {
-                query = query.Where(v => v.DATA_VENDA >= dataInicio.Value);
-            }
+                var query = _context.V_VENDAS_PROPRIAS.AsQueryable();
 
-            if (dataFim.HasValue)
-            {
-                query = query.Where(v => v.DATA_VENDA <= dataFim.Value);
-            }
-
-            var lojaVendas = await query.OrderBy(v => v.DATA_VENDA).ToListAsync();
-
-            if (!lojaVendas.Any())
-            {
-                return RedirectToAction(nameof(LojaVenda), new { dataInicio, dataFim });
-            }
-
-            using (var package = new ExcelPackage())
-            {
-                var worksheet = package.Workbook.Worksheets.Add("Vendas");
-
-                // Adicionar cabeçalhos
-                worksheet.Cells[1, 1].Value = "Data da Venda";
-                worksheet.Cells[1, 2].Value = "Filial";
-                worksheet.Cells[1, 3].Value = "Valor";
-
-                // Adicionar dados
-                for (int i = 0; i < lojaVendas.Count; i++)
+                if (dataInicio.HasValue)
                 {
-                    worksheet.Cells[i + 2, 1].Value = lojaVendas[i].DATA_VENDA.ToString("dd/MM/yyyy");
-                    worksheet.Cells[i + 2, 2].Value = lojaVendas[i].FILIAL;
-                    worksheet.Cells[i + 2, 3].Value = lojaVendas[i].VALOR_PAGO;
+                    query = query.Where(v => v.DATA_VENDA >= dataInicio.Value);
                 }
 
-                // Ajustar formato das colunas
-                worksheet.Cells[1, 1, lojaVendas.Count + 1, 3].AutoFitColumns();
+                if (dataFim.HasValue)
+                {
+                    query = query.Where(v => v.DATA_VENDA <= dataFim.Value);
+                }
 
-                // Configurar cabeçalhos como negrito
-                worksheet.Row(1).Style.Font.Bold = true;
+                var lojaVendas = await query.OrderBy(v => v.DATA_VENDA).ToListAsync();
 
-                // Converter o pacote para um array de bytes
-                var stream = new MemoryStream();
-                package.SaveAs(stream);
-                stream.Position = 0;
+                if (!lojaVendas.Any())
+                {
+                    return RedirectToAction(nameof(LojaVenda), new { dataInicio, dataFim });
+                }
 
-                // Nome do arquivo
-                string fileName = $"Relatorio_Vendas_{DateTime.Now:yyyyMMdd}.xlsx";
+                using (var workbook = new XLWorkbook())
+                {
+                    var worksheet = workbook.Worksheets.Add("Vendas");
 
-                // Retornar o arquivo Excel
-                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+                    // Adicionar cabeçalhos
+                    worksheet.Cell(1, 1).Value = "Data da Venda";
+                    worksheet.Cell(1, 2).Value = "Filial";
+                    worksheet.Cell(1, 3).Value = "Valor";
+
+                    // Adicionar dados
+                    for (int i = 0; i < lojaVendas.Count; i++)
+                    {
+                        worksheet.Cell(i + 2, 1).Value = lojaVendas[i].DATA_VENDA.ToString("dd/MM/yyyy");
+                        worksheet.Cell(i + 2, 2).Value = lojaVendas[i].FILIAL;
+                        worksheet.Cell(i + 2, 3).Value = lojaVendas[i].VALOR_PAGO;
+                    }
+
+                    // Ajustar formato das colunas
+                    worksheet.Columns().AdjustToContents();
+
+                    // Configurar cabeçalhos como negrito
+                    worksheet.Row(1).Style.Font.Bold = true;
+
+                    // Converter o workbook para um array de bytes
+                    using (var stream = new MemoryStream())
+                    {
+                        workbook.SaveAs(stream);
+                        stream.Position = 0;
+
+                        string fileName = $"Relatorio_Vendas_{DateTime.Now:yyyyMMdd}.xlsx";
+                        return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return Content($"Erro ao gerar o relatório: {ex.Message}\nStack Trace: {ex.StackTrace}");
             }
         }
     }

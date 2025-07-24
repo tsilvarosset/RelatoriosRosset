@@ -51,20 +51,6 @@ namespace RelatoriosRosset.Controllers
             }
         }
 
-        //[HttpGet("Teste")]
-        //public async Task<IActionResult> GetLojaNotaFiscalTeste()
-        //{
-        //    try
-        //    {
-        //        var notasFiscais = await _context.LOJA_NOTA_FISCAL
-        //            .Take(10)
-        //            .ToListAsync();
-        //        return Ok(notasFiscais);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"Erro interno: {ex.Message}\nStackTrace: {ex.StackTrace}\nInnerException: {ex.InnerException?.Message}");
-        //    }
-        //}
+       
     }
 }
