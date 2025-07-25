@@ -15,12 +15,12 @@
             <th>Coluna</th>
             <th>Tipo</th>
         </tr>
-        <tr><td>CODIGO_FILIAL</td><td>char</td></tr>
-        <tr><td>NF_NUMERO</td><td>char</td></tr>
-        <tr><td>SERIE_NF</td><td>varchar</td></tr>
-        <tr><td>CODIGO_CLIENTE</td><td>varchar</td></tr>
-        <tr><td>CODIGO_FILIAL_DESTINO</td><td>char</td></tr>
-        <tr><td>NATUREZA_OPERACAO_CODIGO</td><td>varchar</td></tr>
+        <tr><td>CODIGO_FILIAL</td><td>char(6)</td></tr>
+        <tr><td>NF_NUMERO</td><td>char(15)</td></tr>
+        <tr><td>SERIE_NF</td><td>varchar(6)</td></tr>
+        <tr><td>CODIGO_CLIENTE</td><td>varchar(14)</td></tr>
+        <tr><td>CODIGO_FILIAL_DESTINO</td><td>(6)</td></tr>
+        <tr><td>NATUREZA_OPERACAO_CODIGO</td><td>varchar(8)</td></tr>
         <tr><td>EMISSAO</td><td>datetime</td></tr>
         <tr><td>DATA_SAIDA</td><td>datetime</td></tr>
         <tr><td>RECEBIMENTO</td><td>bit</td></tr>
@@ -28,8 +28,8 @@
         <tr><td>PESO_LIQUIDO</td><td>numeric</td></tr>
         <tr><td>PESO_BRUTO</td><td>numeric</td></tr>
         <tr><td>VOLUMES</td><td>int</td></tr>
-        <tr><td>TIPO_VOLUME</td><td>varchar</td></tr>
-        <tr><td>MARCA_VOLUME</td><td>varchar</td></tr>
+        <tr><td>TIPO_VOLUME</td><td>varchar(20)</td></tr>
+        <tr><td>MARCA_VOLUME</td><td>varchar(10)</td></tr>
         <tr><td>FRETE</td><td>numeric</td></tr>
         <tr><td>SEGURO</td><td>numeric</td></tr>
         <tr><td>FRETE_A_PAGAR</td><td>tinyint</td></tr>
@@ -39,18 +39,18 @@
         <tr><td>VALOR_TOTAL</td><td>numeric</td></tr>
         <tr><td>OBS</td><td>text</td></tr>
         <tr><td>NOTA_IMPRESSA</td><td>bit</td></tr>
-        <tr><td>TRANSP_RAZAO_SOCIAL</td><td>varchar</td></tr>
-        <tr><td>TRANSP_UF</td><td>char</td></tr>
-        <tr><td>TRANSP_CIDADE</td><td>varchar</td></tr>
-        <tr><td>TRANSP_CGC</td><td>varchar</td></tr>
-        <tr><td>TRANSP_INSCRICAO</td><td>varchar</td></tr>
-        <tr><td>TRANSP_ENDERECO</td><td>varchar</td></tr>
+        <tr><td>TRANSP_RAZAO_SOCIAL</td><td>varchar(90)</td></tr>
+        <tr><td>TRANSP_UF</td><td>char(2)</td></tr>
+        <tr><td>TRANSP_CIDADE</td><td>varchar(35)</td></tr>
+        <tr><td>TRANSP_CGC</td><td>varchar(19)</td></tr>
+        <tr><td>TRANSP_INSCRICAO</td><td>varchar(19)</td></tr>
+        <tr><td>TRANSP_ENDERECO</td><td>varchar(40)</td></tr>
         <tr><td>INDICA_CONSUMIDOR_FINAL</td><td>bit</td></tr>
         <tr><td>VALOR_IMPOSTO_AGREGAR</td><td>numeric</td></tr>
         <tr><td>CTB_LANCAMENTO</td><td>int</td></tr>
         <tr><td>CTB_ITEM</td><td>int</td></tr>
         <tr><td>EMPRESA</td><td>int</td></tr>
-        <tr><td>COD_CLIFOR</td><td>char</td></tr>
+        <tr><td>COD_CLIFOR</td><td>char(6)</td></tr>
         <tr><td>NOTA_CANCELADA</td><td>bit</td></tr>
         <tr><td>DATA_CANCELAMENTO</td><td>datetime</td></tr>
         <tr><td>VALOR_CANCELADO</td><td>numeric</td></tr>
@@ -59,45 +59,45 @@
         <tr><td>TIPO_ORIGEM</td><td>tinyint</td></tr>
         <tr><td>SEQUENCIAL_UNICO</td><td>int</td></tr>
         <tr><td>DATA_GERACAO_NSU</td><td>datetime</td></tr>
-        <tr><td>CHAVE_NFE</td><td>varchar</td></tr>
-        <tr><td>PROTOCOLO_AUTORIZACAO_NFE</td><td>varchar</td></tr>
+        <tr><td>CHAVE_NFE</td><td>varchar(44)</td></tr>
+        <tr><td>PROTOCOLO_AUTORIZACAO_NFE</td><td>varchar(15)</td></tr>
         <tr><td>DATA_AUTORIZACAO_NFE</td><td>datetime</td></tr>
         <tr><td>GERAR_AUTOMATICO</td><td>bit</td></tr>
         <tr><td>STATUS_NFE</td><td>smallint</td></tr>
         <tr><td>LOG_STATUS_NFE</td><td>smallint</td></tr>
-        <tr><td>MOTIVO_CANCELAMENTO_NFE</td><td>varchar</td></tr>
+        <tr><td>MOTIVO_CANCELAMENTO_NFE</td><td>varchar(255)</td></tr>
         <tr><td>PRIORIZACAO</td><td>bit</td></tr>
         <tr><td>TIPO_EMISSAO_NFE</td><td>tinyint</td></tr>
         <tr><td>FIN_EMISSAO_NFE</td><td>tinyint</td></tr>
-        <tr><td>REGISTRO_DPEC</td><td>varchar</td></tr>
-        <tr><td>PIN</td><td>varchar</td></tr>
+        <tr><td>REGISTRO_DPEC</td><td>varchar(15)</td></tr>
+        <tr><td>PIN</td><td>varchar(9)</td></tr>
         <tr><td>DATA_REGISTRO_DPEC</td><td>datetime</td></tr>
-        <tr><td>PROTOCOLO_CANCELAMENTO_NFE</td><td>varchar</td></tr>
+        <tr><td>PROTOCOLO_CANCELAMENTO_NFE</td><td>varchar(15)</td></tr>
         <tr><td>DATA_CONTINGENCIA</td><td>datetime</td></tr>
-        <tr><td>JUSTIFICATIVA_CONTINGENCIA</td><td>varchar</td></tr>
+        <tr><td>JUSTIFICATIVA_CONTINGENCIA</td><td>varchar(256)</td></tr>
         <tr><td>OBS_INTERESSE_FISCO</td><td>text</td></tr>
         <tr><td>TRANSP_PF_PJ</td><td>bit</td></tr>
-        <tr><td>NF_NUMERO_REFERENCIADA</td><td>char</td></tr>
-        <tr><td>SERIE_NF_REFERENCIADA</td><td>varchar</td></tr>
+        <tr><td>NF_NUMERO_REFERENCIADA</td><td>char(15)</td></tr>
+        <tr><td>SERIE_NF_REFERENCIADA</td><td>varchar(6)</td></tr>
         <tr><td>LX_STATUS_NOTA_FISCAL</td><td>tinyint</td></tr>
-        <tr><td>EMAIL_NFE</td><td>varchar</td></tr>
-        <tr><td>INFORMACAO_COMPLEMENTAR</td><td>varchar</td></tr>
+        <tr><td>EMAIL_NFE</td><td>varchar(60)</td></tr>
+        <tr><td>INFORMACAO_COMPLEMENTAR</td><td>varchar(2000)</td></tr>
         <tr><td>DATA_HORA_EMISSAO</td><td>datetime</td></tr>
         <tr><td>DATA_HORA_SAIDA</td><td>datetime</td></tr>
         <tr><td>INDICA_PRESENCA_COMPRADOR</td><td>tinyint</td></tr>
-        <tr><td>TRANSPORTADORA</td><td>varchar</td></tr>
+        <tr><td>TRANSPORTADORA</td><td>varchar(25)</td></tr>
         <tr><td>UTC_DATA_SAIDA</td><td>tinyint</td></tr>
         <tr><td>UTC_EMISSAO</td><td>tinyint</td></tr>
         <tr><td>UTC_DATA_AUTORIZACAO_NFE</td><td>tinyint</td></tr>
         <tr><td>VALOR_APROX_IMPOSTOS</td><td>numeric</td></tr>
         <tr><td>ID_ENDERECO_ENTREGA</td><td>int</td></tr>
-        <tr><td>NUMERO_CONHECIMENTO_RELACIONADO</td><td>char</td></tr>
+        <tr><td>NUMERO_CONHECIMENTO_RELACIONADO</td><td>char(15)</td></tr>
         <tr><td>OBS_INTERESSE_FISCO_MS</td><td>varchar</td></tr>
         <tr><td>ID_INTERMEDIADOR</td><td>int</td></tr>
         <tr><td>PGTO_INTERMEDIADOR</td><td>bit</td></tr>
-        <tr><td>DESC_MEIO_PGTO</td><td>varchar</td></tr>
-        <tr><td>NOME_ENTREGA</td><td>varchar</td></tr>
-        <tr><td>URL_ENVIO</td><td>varchar</td></tr>
+        <tr><td>DESC_MEIO_PGTO</td><td>varchar(60)</td></tr>
+        <tr><td>NOME_ENTREGA</td><td>varchar(100)</td></tr>
+        <tr><td>URL_ENVIO</td><td>varchar(100)</td></tr>
         <tr><td>ID_PROCESSO</td><td>int</td></tr>
     </table>
     <p>
@@ -105,5 +105,9 @@
     <li>emissaoInicio</li>
     <li>emissaoFim</li>
     </p>
+
+<p><strong>Endpoint:</strong></p>
+<li style="color: red;">GET http://rosset39b:91/LojaNotaFiscal</li>
+
 </ul>
 
