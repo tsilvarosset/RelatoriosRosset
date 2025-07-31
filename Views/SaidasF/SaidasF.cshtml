@@ -1,12 +1,12 @@
-﻿@model IEnumerable<RelatoriosRosset.Models.EntradasFModel>
+﻿@model IEnumerable<RelatoriosRosset.Models.SaidasFModel>
 
 @{
-    ViewData["Title"] = "Pesquisa de Entradas";
+    ViewData["Title"] = "Pesquisa de Saidas";
 }
 
-<h2>Pesquisa de Entradas</h2>
+<h2>Pesquisa de Saídas</h2>
 
-<form asp-action="ExecutarProcedureEntradasF" method="get" class="mb-4">
+<form asp-action="ExecutarProcedureSaidasF" method="get" class="mb-4">
     <div class="row">
         <div class="col-md-4">
             <label for="dataInicio">Data Início</label>
@@ -33,11 +33,11 @@
         <thead>
             <tr>
                 <th>Filial</th>
-                <th>Origem</th>
-                <th>NF Entrada</th>
+                <th>Destino</th>
+                <th>NF Saida</th>
                 <th>Série</th>
                 <th>CFOP</th>
-                <th>Recebimento</th>
+                <th>Emissão</th>
                 <th>Valor Contábil</th>
                 <th>Base Imposto</th>
                 <th>Alíquota</th>
@@ -46,20 +46,20 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var entradas in Model)
+            @foreach (var saidas in Model)
             {
                 <tr>
-                    <td>@entradas.FILIAL</td>
-                    <td>@entradas.ORIGEM</td>
-                    <td>@entradas.NF_ENTRADA</td>
-                    <td>@entradas.SERIE</td>
-                    <td>@entradas.CFOP</td>
-                    <td>@entradas.RECEBIMENTO.ToString("dd/MM/yyyy")</td>
-                    <td>@entradas.VALOR_CONTABIL</td>
-                    <td>@entradas.BASE_IMPOSTO</td>
-                    <td>@entradas.ALIQUOTA</td>
-                    <td>@entradas.VALOR_ICMS</td>
-                    <td>@entradas.CHAVE_NFE</td>
+                    <td>@saidas.FILIAL</td>
+                    <td>@saidas.DESTINO</td>
+                    <td>@saidas.NF_SAIDA</td>
+                    <td>@saidas.SERIE</td>
+                    <td>@saidas.CFOP</td>
+                    <td>@saidas.EMISSAO.ToString("dd/MM/yyyy")</td>
+                    <td>@saidas.VALOR_CONTABIL</td>
+                    <td>@saidas.BASE_IMPOSTO</td>
+                    <td>@saidas.ALIQUOTA</td>
+                    <td>@saidas.VALOR_ICMS</td>
+                    <td>@saidas.CHAVE_NFE</td>
                 </tr>
             }
         </tbody>
@@ -67,7 +67,7 @@
 }
 else
 {
-    <p>Nenhuma entrada encontrada para o período selecionado.</p>
+    <p>Nenhuma saida encontrada para o período selecionado.</p>
 }
 
 @section Scripts {
