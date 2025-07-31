@@ -22,6 +22,7 @@ namespace RelatoriosRosset
             modelBuilder.Entity<FiliaisAtivasPModel>().HasNoKey();
             modelBuilder.Entity<FiliaisAtivasFModel>().HasNoKey();
             modelBuilder.Entity<EstoqueEANModel>().HasNoKey();
+            modelBuilder.Entity<EntradasFModel>().HasNoKey();
 
 
         }
@@ -43,6 +44,7 @@ namespace RelatoriosRosset
         public DbSet<FiliaisAtivasPModel> V_FILIAIS_ATIVAS_PROPRIAS { get; set; }
         public DbSet<FiliaisAtivasFModel> V_FILIAIS_ATIVAS_FRANQUIAS { get; set; }
         public DbSet<EstoqueEANModel> TABELA_ESTOQUE_EAN_CUSTO { get; set; }
+        public DbSet<EntradasFModel> TABELA_ENTRADAS_F { get; set; }
 
 
     }
