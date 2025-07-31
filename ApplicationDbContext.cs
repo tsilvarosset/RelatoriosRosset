@@ -19,10 +19,9 @@ namespace RelatoriosRosset
             .HasNoKey()
             .ToTable("LOJA_NOTA_FISCAL"); // Confirme o nome exato da tabela
 
-
-
             modelBuilder.Entity<FiliaisAtivasPModel>().HasNoKey();
             modelBuilder.Entity<FiliaisAtivasFModel>().HasNoKey();
+            modelBuilder.Entity<EstoqueEANModel>().HasNoKey();
 
 
         }
@@ -43,7 +42,8 @@ namespace RelatoriosRosset
         public DbSet<LojaNotaFiscalModel> LOJA_NOTA_FISCAL { get; set; }
         public DbSet<FiliaisAtivasPModel> V_FILIAIS_ATIVAS_PROPRIAS { get; set; }
         public DbSet<FiliaisAtivasFModel> V_FILIAIS_ATIVAS_FRANQUIAS { get; set; }
-        
+        public DbSet<EstoqueEANModel> TABELA_ESTOQUE_EAN_CUSTO { get; set; }
+
 
     }
 

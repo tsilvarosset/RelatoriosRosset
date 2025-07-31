@@ -1,0 +1,70 @@
+﻿@model List<RelatoriosRosset.Models.EstoqueEANModel>
+
+@{
+    ViewData["Title"] = "Estoque EAN Custo";
+    var dataFinal = ViewBag.DATA_SALDO == null ? DateTime.Today.ToString("yyyy-MM-dd") : ((DateTime?)ViewBag.DATA_SALDO).Value.ToString("yyyy-MM-dd");
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (TempData["Erro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Erro"]
+    </div>
+}
+
+<form asp-controller="EstoqueEAN" asp-action="ExecutarProcedureEstoque" method="post">
+    <div class="form-group mb-3">
+        <label for="dataFinal" class="form-label">Data Saldo:</label>
+        <input type="date" class="form-control" id="dataFinal" name="dataFinal" value="@dataFinal" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Gerar Saldo</button>
+    <a asp-action="ExportarExcel" class="btn btn-success">Gerar Relatório</a>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <h3>Resultados</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Filial</th>
+                <th>Código de Barras</th>
+                <th>Produto</th>
+                <th>Estoque</th>
+                <th>Último Custo</th>
+                <th>Data Saldo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FILIAL</td>
+                    <td>@item.CODIGO_BARRA</td>
+                    <td>@item.PRODUTO</td>
+                    <td>@item.ESTOQUE</td>
+                    <td>@item.ULTIMO_CUSTO</td>
+                    <td>@item.DATA_SALDO.ToString("dd/MM/yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nenhum dado disponível.</p>
+}
+
+@section Scripts {
+    <script>
+        document.querySelector('form[method="post"]').addEventListener('submit', function (e) {
+            const dataFinal = new Date(document.getElementById('dataFinal').value);
+            if (isNaN(dataFinal)) {
+                e.preventDefault();
+                alert("Por favor, selecione uma data válida.");
+            }
+        });
+    </script>
+}
