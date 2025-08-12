@@ -17,15 +17,16 @@ namespace RelatoriosRosset
 
             modelBuilder.Entity<LojaNotaFiscalModel>()
             .HasNoKey()
-            .ToTable("LOJA_NOTA_FISCAL"); // Confirme o nome exato da tabela
+            .ToTable("LOJA_NOTA_FISCAL"); 
 
             modelBuilder.Entity<FiliaisAtivasPModel>().HasNoKey();
             modelBuilder.Entity<FiliaisAtivasFModel>().HasNoKey();
             modelBuilder.Entity<EstoqueEANModel>().HasNoKey();
             modelBuilder.Entity<EntradasFModel>().HasNoKey();
             modelBuilder.Entity<SaidasFModel>().HasNoKey();
-
-
+            modelBuilder.Entity<RegistroSaidaModel>().HasNoKey();
+            modelBuilder.Entity<RegistroEntradaModel>().HasNoKey();
+            modelBuilder.Entity<EANPorSaidaModel>().HasNoKey();
         }
 
 
@@ -47,7 +48,9 @@ namespace RelatoriosRosset
         public DbSet<EstoqueEANModel> TABELA_ESTOQUE_EAN_CUSTO { get; set; }
         public DbSet<EntradasFModel> TABELA_ENTRADAS_F { get; set; }
         public DbSet<SaidasFModel> TABELA_SAIDAS_F { get; set; }
-
+        public DbSet<RegistroSaidaModel> W_LF_REGISTRO_SAIDA_IMPOSTO_ITEM { get; set; }
+        public DbSet<RegistroEntradaModel> W_LF_REGISTRO_ENTRADA_IMPOSTO_ITEM { get; set; }
+        public DbSet<EANPorSaidaModel> EAN_POR_SAIDA { get; set; }
 
     }
 

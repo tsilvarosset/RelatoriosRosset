@@ -1,0 +1,74 @@
+﻿namespace RelatoriosRosset.Models
+{
+    public class RegistroSaidaModel
+    {
+        public string? FILIAL { get; set; }
+        public string? NF_SAIDA { get; set; }
+        public string? NOME_CLIFOR { get; set; }
+        public string? NF_SAIDA_FINAL { get; set; }
+        public string? SERIE_NF { get; set; }
+        public string? SERIE_NF_OFICIAL { get; set; }
+        public string? ESPECIE { get; set; }
+        public byte? ID_IMPOSTO { get; set; }
+        public string? IMPOSTO { get; set; }
+        public Decimal? VALOR_CONTABIL { get; set; }
+        public Decimal? BASE_IMPOSTO { get; set; }
+        public Decimal? TAXA_IMPOSTO { get; set; }
+        public Decimal? VALOR_IMPOSTO { get; set; }
+        public Decimal? VALOR_IMPOSTO_OUTROS { get; set; }
+        public Decimal? VALOR_IMPOSTO_ISENTO { get; set; }
+        public string? CODIGO_FISCAL_OPERACAO { get; set; }
+        public string? DENOMINACAO_CFOP { get; set; }
+        public string? LX_CODIGO_APURACAO { get; set; }
+        public DateTime? EMISSAO { get; set; }
+        public string? COD_FILIAL { get; set; }
+        public string? COD_CLIFOR { get; set; }
+        public string? CGC_CPF { get; set; }
+        public string? RG_IE { get; set; }
+        public string? UF { get; set; }
+        public int? EMPRESA { get; set; }
+        public string? CONTA_CONTABIL { get; set; }
+        public string? DESC_CONTA { get; set; }
+        public Decimal? DESCONTO { get; set; }
+        public Decimal? FRETE { get; set; }
+        public Decimal? SEGURO { get; set; }
+        public Decimal? ENCARGO { get; set; }
+        public Decimal? BASE_IMPOSTO_AGREGADO { get; set; }
+        public Decimal? VALOR_IMPOSTO_AGREGADO { get; set; }
+        public string? COD_MATRIZ_FISCAL { get; set; }
+        public string? MATRIZ_FISCAL { get; set; }
+        public string? CODIGO_ITEM { get; set; }
+        public string? TRIBUT_ICMS { get; set; }
+        public string? TRIBUT_ORIGEM { get; set; }
+        public string? ITEM_IMPRESSAO { get; set; }
+        public Decimal? QTDE_ITEM { get; set; }
+        public Decimal? PRECO_UNITARIO { get; set; }
+        public Decimal? VALOR_BRUTO_ITEM { get; set; }
+        public Decimal? MPADRAO_VALOR_DESCONTOS { get; set; }
+        public string? DESCRICAO_ITEM { get; set; }
+        public string? UNIDADE { get; set; }
+        public string? CLASSIF_FISCAL { get; set; }
+        public string? COD_TABELA_FILHA { get; set; }
+        public byte? INDICADOR_CFOP { get; set; }
+        public int? ITEM { get; set; }
+        public string? NUMERO_MODELO_FISCAL { get; set; }
+        public string? CODIGO_CLIENTE { get; set; }
+        public string? CLIENTE_VAREJO { get; set; }
+        public string? TEXTO_LEGAL { get; set; }
+        public long? ID_FISCAL { get; set; }
+        public int? ID_FISCAL_ITEM { get; set; }
+        public int? SUB_ITEM_TAMANHO { get; set; }
+        public int? ITEM_NOTA { get; set; }
+        public string? COD_MATRIZ_CONTABIL { get; set; }
+        public string? MATRIZ_CONTABIL { get; set; }
+        public int? ID_EXCECAO_IMPOSTO { get; set; }
+        public string? SITUACAO_TRIBUTARIA { get; set; }
+        public string? ORIGEM_ITEM { get; set; }
+        public string? CODIGO_BENEFICIO_FISCAL { get; set; }
+        public Decimal? BASE_IMPOSTO_EXCLUSAO { get; set; }
+        public Decimal? TAXA_IMPOSTO_EXCLUSAO { get; set; }
+        public Decimal? VALOR_IMPOSTO_EXCLUSAO { get; set; }
+        public Decimal? VALOR_ICMS_EXCLUSAO { get; set; }
+        public Decimal? ID_EQUIPAMENTO { get; set; }
+    }
+}

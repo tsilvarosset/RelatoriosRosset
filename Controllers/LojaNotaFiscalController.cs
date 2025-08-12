@@ -50,7 +50,5 @@ namespace RelatoriosRosset.Controllers
                 return StatusCode(500, $"Erro interno: {ex.Message}\nStackTrace: {ex.StackTrace}\nInnerException: {ex.InnerException?.Message}");
             }
         }
-
-       
     }
 }

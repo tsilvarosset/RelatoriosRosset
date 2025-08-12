@@ -1,7 +1,6 @@
 ﻿namespace RelatoriosRosset.Models
 {
-
-    public class CustoLojaResults
+    public class CustoMatrizModel
     {
         public int? Item { get; set; }
         public string DescItemComposicao { get; set; }
@@ -26,6 +25,5 @@
         public decimal? ValorLiq { get; set; } // Nullable decimal
         public decimal? ValorProducao { get; set; } // Nullable decimal
         public decimal? ValorBruto { get; set; } // Nullable decimal
-        public decimal? VlIcmsOp { get; set; } // Nullable decimal
     }
 }

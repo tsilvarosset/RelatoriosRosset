@@ -3,80 +3,38 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using OfficeOpenXml;
 using RelatoriosRosset.Models;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RelatoriosRosset.Controllers
 {
-    public class CustoLojasController : Controller
+    public class CustoMatrizController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CustoLojasController(ApplicationDbContext context)
+        public CustoMatrizController(ApplicationDbContext context)
         {
             _context = context;
-            //ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         }
 
-        // GET: Exibe a view com o formulário
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> CustoMatriz()
         {
-            var model = new CustoLojasViewModel();
-            await CarregarFiliais(); // Carrega as filiais do banco
-            //Console.WriteLine($"Filiais no Index: {((List<SelectListItem>)ViewBag.FILIAIS).Count}");
+            var model = new CustoViewMatrizModel();
+            
             return View(model);
 
-        }
-        private async Task CarregarFiliais()
-        {
-            try
-            {
-                var filiais = await _context.FILIAIS
-                    .Select(f => new SelectListItem
-                    {
-                        //Value = f.COD_FILIAL,
-                        Text = f.FILIAL
-                    })
-                    .OrderBy(f => f.Text)
-                    .ToListAsync();
-
-                //Console.WriteLine($"Filiais carregadas: {filiais.Count}");
-                foreach (var filial in filiais)
-                {
-                    Console.WriteLine($"Filial: {filial.Text}, Código: {filial.Value}");
-                }
-
-                ViewBag.FILIAIS = filiais;
-            }
-            catch (Exception ex)
-            {
-                ViewBag.FILIAIS = new List<SelectListItem>();
-                TempData["Erro"] = $"Erro ao carregar filiais: {ex.Message}. StackTrace: {ex.StackTrace}";
-                Console.WriteLine($"Erro ao carregar filiais: {ex.Message}\n{ex.StackTrace}");
-                if (ex.InnerException != null)
-                {
-                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}\n{ex.InnerException.StackTrace}");
-                }
-            }
         }
 
         [HttpPost]
         public async Task<IActionResult> ExecutarProcedure(DateTime dataInicial, DateTime dataFinal, string filial)
         {
-            var model = new CustoLojasViewModel
+            var model = new CustoViewMatrizModel
             {
                 DataInicial = dataInicial,
-                DataFinal = dataFinal,
-                Filial = filial
+                DataFinal = dataFinal
             };
 
-            Console.WriteLine($"Executando procedure com DataInicial: {dataInicial}, DataFinal: {dataFinal}, Filial: {filial ?? "Nulo"}");
+            Console.WriteLine($"Executando procedure com DataInicial: {dataInicial}, DataFinal: {dataFinal} ");
 
             try
             {
@@ -85,8 +43,8 @@ namespace RelatoriosRosset.Controllers
                 await connection.OpenAsync();
 
                 using var command = connection.CreateCommand();
-                command.CommandTimeout = 120;
-                command.CommandText = "EXEC GERA_CUSTO_LOJAS_EAN @DataInicial, @DataFinal, @Filial";
+                command.CommandTimeout = 120000000;
+                command.CommandText = "EXEC GERA_CUSTO_LOJAS_EAN_MATRIZ @DataInicial, @DataFinal ";
                 command.Parameters.Add(new SqlParameter
                 {
                     ParameterName = "@DataInicial",
@@ -99,13 +57,7 @@ namespace RelatoriosRosset.Controllers
                     SqlDbType = SqlDbType.Date,
                     Value = dataFinal
                 });
-                command.Parameters.Add(new SqlParameter
-                {
-                    ParameterName = "@Filial",
-                    SqlDbType = SqlDbType.NVarChar,
-                    Value = string.IsNullOrEmpty(filial) ? (object)DBNull.Value : filial
-                });
-
+                
                 await command.ExecuteNonQueryAsync();
                 model.Mensagem = "Saldo Gerado com sucesso!";
                 Console.WriteLine("Saldo Gerado com sucesso!");
@@ -116,40 +68,7 @@ namespace RelatoriosRosset.Controllers
                 Console.WriteLine($"Erro ao executar a procedure: {ex.Message}\n{ex.StackTrace}");
             }
 
-            // Carrega as filiais
-            try
-            {
-                using var serviceScope = HttpContext.RequestServices.CreateScope();
-                using var newContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                var filiais = await newContext.FILIAIS
-                    .Select(f => new SelectListItem
-                    {
-                        //Value = f.COD_FILIAL,
-                        Text = f.FILIAL
-                    })
-                    .OrderBy(f => f.Text)
-                    .ToListAsync();
-
-                Console.WriteLine($"Filiais carregadas: {filiais.Count}");
-                foreach (var f in filiais)
-                {
-                    Console.WriteLine($"Filial: {f.Text}, Código: {f.Value}");
-                }
-
-                ViewBag.FILIAIS = filiais;
-            }
-            catch (Exception ex)
-            {
-                ViewBag.FILIAIS = new List<SelectListItem>();
-                TempData["Erro"] = $"Erro ao carregar filiais: {ex.Message}. StackTrace: {ex.StackTrace}";
-                Console.WriteLine($"Erro ao carregar filiais: {ex.Message}\n{ex.StackTrace}");
-                if (ex.InnerException != null)
-                {
-                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}\n{ex.InnerException.StackTrace}");
-                }
-            }
-
-            return View("Index", model);
+            return View("CustoMatriz", model);
         }
 
         // GET: Gera o relatório em Excel
@@ -187,9 +106,8 @@ namespace RelatoriosRosset.Controllers
                         VALOR_IMPOSTO_DESTACAR AS ValorImpostoDestacar,
                         VALOR_LIQ AS ValorLiq,
                         VALOR_PRODUCAO AS ValorProducao,
-                        VALOR_BRUTO AS ValorBruto,
-                        VL_ICMS_OP AS VlIcmsOp
-                    FROM TABELA_CUSTO_EAN
+                        VALOR_BRUTO AS ValorBrut
+                    FROM TABELA_CUSTO_EAN_MATRIZ
                     WHERE TRY_CAST(ITEM AS INT) IS NOT NULL
                         AND TRY_CAST(ITEM_COMPOSICAO AS INT) IS NOT NULL";
 
@@ -221,7 +139,6 @@ namespace RelatoriosRosset.Controllers
                         ValorLiq = reader.IsDBNull(20) ? null : reader.GetDecimal(20),
                         ValorProducao = reader.IsDBNull(21) ? null : reader.GetDecimal(21),
                         ValorBruto = reader.IsDBNull(22) ? null : reader.GetDecimal(22),
-                        VlIcmsOp = reader.IsDBNull(23) ? null : reader.GetDecimal(23)
                     });
                 }
 
@@ -231,8 +148,8 @@ namespace RelatoriosRosset.Controllers
                     {
                         Mensagem = "Nenhum registro encontrado na TABELA_CUSTO_EAN."
                     };
-                    await CarregarFiliais();
-                    return View("Index", model);
+                    
+                    return View("CustoMatriz", model);
                 }
 
                 using var workbook = new XLWorkbook();
@@ -262,7 +179,6 @@ namespace RelatoriosRosset.Controllers
                 worksheet.Cell(1, 21).Value = "Valor Líquido";
                 worksheet.Cell(1, 22).Value = "Valor Produção";
                 worksheet.Cell(1, 23).Value = "Valor Bruto";
-                worksheet.Cell(1, 24).Value = "Valor ICMS Operação";
 
                 // Data
                 for (int i = 0; i < resultados.Count; i++)
@@ -290,7 +206,6 @@ namespace RelatoriosRosset.Controllers
                     worksheet.Cell(i + 2, 21).Value = resultados[i].ValorLiq; // Nullable
                     worksheet.Cell(i + 2, 22).Value = resultados[i].ValorProducao; // Nullable
                     worksheet.Cell(i + 2, 23).Value = resultados[i].ValorBruto; // Nullable
-                    worksheet.Cell(i + 2, 24).Value = resultados[i].VlIcmsOp; // Nullable
                 }
 
                 // Apply number formatting
@@ -325,8 +240,8 @@ namespace RelatoriosRosset.Controllers
                 {
                     Mensagem = $"Erro ao gerar o relatório: {ex.Message}. StackTrace: {ex.StackTrace}"
                 };
-                await CarregarFiliais();
-                return View("Index", model);
+               
+                return View("CustoMatriz", model);
             }
         }
     }

@@ -8,7 +8,7 @@
     <h2 class="display-4">TABELAS FISCAIS</h2>
 </div>
 
-<h3>LOJA_NOTA_FISCAL</h3>
+<h3>LOJA NOTA FISCAL (CAPA DE NOTA FISCAL)</h3>
 <p>
     <table border="1">
         <tr>
@@ -101,13 +101,186 @@
         <tr><td>ID_PROCESSO</td><td>int</td></tr>
     </table>
     <p>
-    <p><strong>Filtros:</strong></p>
+    <p><strong>Parâmetros:</strong></p>
     <li>emissaoInicio</li>
     <li>emissaoFim</li>
     </p>
 
 <p><strong>Endpoint:</strong></p>
 <li style="color: red;">GET http://rosset39b:91/LojaNotaFiscal</li>
+
+<p>
+
+<h3>REGISTRO DE SAIDA (ITENS E IMPOSTOS DAS NOTAS FISCAIS DE SAÍDA)</h3>
+<p>
+    <table border="1">
+        <tr>
+            <th>Coluna</th>
+            <th>Tipo</th>
+        </tr>
+
+        <tr><td>FILIAL</td><td>varchar(25)</td></tr>
+        <tr><td>NF_SAIDA</td><td>varchar(15)</td></tr>
+        <tr><td>NOME_CLIFOR</td><td>varchar(25)</td></tr>
+        <tr><td>NF_SAIDA_FINAL</td><td>varchar(15)</td></tr>
+        <tr><td>SERIE_NF</td><td>char(3)</td></tr>
+        <tr><td>SERIE_NF_OFICIAL</td><td>varchar(6)</td></tr>
+        <tr><td>ESPECIE</td><td>varchar(4)</td></tr>
+        <tr><td>ID_IMPOSTO</td><td>tinyint</td></tr>
+        <tr><td>IMPOSTO</td><td>varchar(25)</td></tr>
+        <tr><td>VALOR_CONTABIL</td><td>numeric</td></tr>
+        <tr><td>BASE_IMPOSTO</td><td>numeric</td></tr>
+        <tr><td>TAXA_IMPOSTO</td><td>numeric</td></tr>
+        <tr><td>VALOR_IMPOSTO</td><td>numeric</td></tr>
+        <tr><td>VALOR_IMPOSTO_OUTROS</td><td>numeric</td></tr>
+        <tr><td>VALOR_IMPOSTO_ISENTO</td><td>numeric</td></tr>
+        <tr><td>CODIGO_FISCAL_OPERACAO</td><td>char(4)</td></tr>
+        <tr><td>DENOMINACAO_CFOP</td><td>varchar(250)</td></tr>
+        <tr><td>LX_CODIGO_APURACAO</td><td>varchar(4)</td></tr>
+        <tr><td>EMISSAO</td><td>datetime</td></tr>
+        <tr><td>COD_FILIAL</td><td>char(6)</td></tr>
+        <tr><td>COD_CLIFOR</td><td>char(6)</td></tr>
+        <tr><td>CGC_CPF</td><td>varchar(19)</td></tr>
+        <tr><td>RG_IE</td><td>varchar(19)</td></tr>
+        <tr><td>UF</td><td>char(2)</td></tr>
+        <tr><td>EMPRESA</td><td>int</td></tr>
+        <tr><td>CONTA_CONTABIL</td><td>varchar(20)</td></tr>
+        <tr><td>DESC_CONTA</td><td>varchar(40)</td></tr>
+        <tr><td>DESCONTO</td><td>numeric</td></tr>
+        <tr><td>FRETE</td><td>numeric</td></tr>
+        <tr><td>SEGURO</td><td>numeric</td></tr>
+        <tr><td>ENCARGO</td><td>numeric</td></tr>
+        <tr><td>BASE_IMPOSTO_AGREGADO</td><td>numeric</td></tr>
+        <tr><td>VALOR_IMPOSTO_AGREGADO</td><td>numeric</td></tr>
+        <tr><td>COD_MATRIZ_FISCAL</td><td>char(6)</td></tr>
+        <tr><td>MATRIZ_FISCAL</td><td>varchar(25)</td></tr>
+        <tr><td>CODIGO_ITEM</td><td>varchar(50)</td></tr>
+        <tr><td>TRIBUT_ICMS</td><td>char(3)</td></tr>
+        <tr><td>TRIBUT_ORIGEM</td><td>char(3)</td></tr>
+        <tr><td>ITEM_IMPRESSAO</td><td>char(4)</td></tr>
+        <tr><td>QTDE_ITEM</td><td>numeric</td></tr>
+        <tr><td>PRECO_UNITARIO</td><td>numeric</td></tr>
+        <tr><td>VALOR_BRUTO_ITEM</td><td>numeric</td></tr>
+        <tr><td>MPADRAO_VALOR_DESCONTOS</td><td>numeric</td></tr>
+        <tr><td>DESCRICAO_ITEM</td><td>varchar(80)</td></tr>
+        <tr><td>UNIDADE</td><td>varchar(5)</td></tr>
+        <tr><td>CLASSIF_FISCAL</td><td>varchar(10)</td></tr>
+        <tr><td>COD_TABELA_FILHA</td><td>char(1)</td></tr>
+        <tr><td>INDICADOR_CFOP</td><td>tinyint</td></tr>
+        <tr><td>ITEM</td><td>int</td></tr>
+        <tr><td>NUMERO_MODELO_FISCAL</td><td>varchar(3)</td></tr>
+        <tr><td>CODIGO_CLIENTE</td><td>varchar(14)</td></tr>
+        <tr><td>CLIENTE_VAREJO</td><td>varchar(40)</td></tr>
+        <tr><td>TEXTO_LEGAL</td><td>varchar(500)</td></tr>
+        <tr><td>ID_FISCAL</td><td>bigint</td></tr>
+        <tr><td>ID_FISCAL_ITEM</td><td>int</td></tr>
+        <tr><td>SUB_ITEM_TAMANHO</td><td>int</td></tr>
+        <tr><td>ITEM_NOTA</td><td>int</td></tr>
+        <tr><td>COD_MATRIZ_CONTABIL</td><td>char(6)</td></tr>
+        <tr><td>MATRIZ_CONTABIL</td><td>varchar(25)</td></tr>
+        <tr><td>ID_EXCECAO_IMPOSTO</td><td>int</td></tr>
+        <tr><td>SITUACAO_TRIBUTARIA</td><td>char(4)</td></tr>
+        <tr><td>ORIGEM_ITEM</td><td>char(1)</td></tr>
+        <tr><td>CODIGO_BENEFICIO_FISCAL</td><td>varchar(15)</td></tr>
+        <tr><td>BASE_IMPOSTO_EXCLUSAO</td><td>numeric</td></tr>
+        <tr><td>TAXA_IMPOSTO_EXCLUSAO</td><td>numeric</td></tr>
+        <tr><td>VALOR_IMPOSTO_EXCLUSAO</td><td>numeric</td></tr>
+        <tr><td>VALOR_ICMS_EXCLUSAO</td><td>numeric</td></tr>
+        <tr><td>ID_EQUIPAMENTO</td><td>numeric</td></tr>
+    </table>
+<p>
+<p><strong>Parâmetros:</strong></p>
+<li>emissaoInicio</li>
+<li>emissaoFim</li>
+    </p>
+
+<p><strong>Endpoint:</strong></p>
+<li style="color: red;">GET http://rosset39b:91/RegistroSaida</li>
+
+<p>
+
+    <h3>REGISTRO DE ENTRADA (ITENS E IMPOSTOS DAS NOTAS FISCAIS DE ENTRADA)</h3>
+<p>
+    <table border="1">
+        <tr>
+            <th>Coluna</th>
+            <th>Tipo</th>
+        </tr>
+
+        <tr><td>NOME_CLIFOR</td><td>varchar(25)</td></tr>
+        <tr><td>NF_ENTRADA</td><td>varchar(15)</td></tr>
+        <tr><td>SERIE_NF_ENTRADA</td><td>varchar(6)</td></tr>
+        <tr><td>SERIE_NF_OFICIAL</td><td>varchar(6)</td></tr>
+        <tr><td>ESPECIE_SERIE</td><td>int(4)</td></tr>
+        <tr><td>ESPECIE</td><td>varchar(40)</td></tr>
+        <tr><td>ID_IMPOSTO</td><td>tinyint</td></tr>
+        <tr><td>IMPOSTO</td><td>varchar(25)</td></tr>
+        <tr><td>VALOR_CONTABIL</td><td>numeric(9)</td></tr>
+        <tr><td>BASE_IMPOSTO</td><td>numeric(9)</td></tr>
+        <tr><td>TAXA_IMPOSTO</td><td>numeric(9)</td></tr>
+        <tr><td>VALOR_IMPOSTO</td><td>numeric(9)</td></tr>
+        <tr><td>VALOR_IMPOSTO_OUTROS</td><td>numeric(9)</td></tr>
+        <tr><td>VALOR_IMPOSTO_ISENTO</td><td>numeric(9)</td></tr>
+        <tr><td>CODIGO_FISCAL_OPERACAO</td><td></td><td>char(4)</td></tr>
+        <tr><td>DENOMINACAO_CFOP</td><td>varchar(250)</td></tr>
+        <tr><td>LX_CODIGO_APURACAO</td><td>varchar(4)</td></tr>
+        <tr><td>RECEBIMENTO</td><td>datetime</td></tr>
+        <tr><td>EMISSAO</td><td>datetime</td></tr>
+        <tr><td>FILIAL</td><td>varchar(25)</td></tr>
+        <tr><td>COD_FILIAL</td><td>char(6)</td></tr>
+        <tr><td>COD_CLIFOR</td><td>char(6)</td></tr>
+        <tr><td>CGC_CPF</td><td>varchar(19)</td></tr>
+        <tr><td>RG_IE</td><td>varchar(19)</td></tr>
+        <tr><td>UF</td><td>char(2)</td></tr>
+        <tr><td>EMPRESA</td><td>int</td></tr>
+        <tr><td>CONTA_CONTABIL</td><td>varchar(20)</td></tr>
+        <tr><td>DESC_CONTA</td><td>varchar(40)</td></tr>
+        <tr><td>DESCONTO</td><td>numeric(9)</td></tr>
+        <tr><td>FRETE</td><td>numeric(9)</td></tr>
+        <tr><td>SEGURO</td><td>numeric(9)</td></tr>
+        <tr><td>ENCARGO</td><td>numeric(9)</td></tr>
+        <tr><td>BASE_IMPOSTO_AGREGADO</td><td>numeric(9)</td></tr>
+        <tr><td>VALOR_IMPOSTO_AGREGADO</td><td>numeric(9)</td></tr>
+        <tr><td>COD_MATRIZ_FISCAL</td><td>char(6)</td></tr>
+        <tr><td>MATRIZ_FISCAL</td><td>varchar(25)</td></tr>
+        <tr><td>CODIGO_ITEM</td><td>varchar(50)</td></tr>
+        <tr><td>TRIBUT_ICMS</td><td>char(3)</td></tr>
+        <tr><td>TRIBUT_ORIGEM</td><td>char(3)</td></tr>
+        <tr><td>ITEM_IMPRESSAO</td><td>char(4)</td></tr>
+        <tr><td>QTDE_ITEM</td><td>numeric(9)</td></tr>
+        <tr><td>PRECO_UNITARIO</td><td>numeric(9)</td></tr>
+        <tr><td>VALOR_BRUTO_ITEM</td><td>numeric(9)</td></tr>
+        <tr><td>VALOR_DESCONTOS</td><td>numeric(9)</td></tr>
+        <tr><td>DESCRICAO_ITEM</td><td>varchar(80)</td></tr>
+        <tr><td>UNIDADE</td><td>varchar(5)</td></tr>
+        <tr><td>CLASSIF_FISCAL</td><td>char(10)</td></tr>
+        <tr><td>COD_TABELA_FILHA</td><td>char(1)</td></tr>
+        <tr><td>INDICADOR_CFOP</td><td>tinyint</td></tr>
+        <tr><td>NF_PROPRIA_EMITIDA</td><td>bit</td></tr>
+        <tr><td>ITEM</td><td>int</td></tr>
+        <tr><td>NUMERO_MODELO_FISCAL</td><td>varchar(3)</td></tr>
+        <tr><td>CODIGO_CLIENTE</td><td>varchar(14)</td></tr>
+        <tr><td>CLIENTE_VAREJO</td><td>varchar(40)</td></tr>
+        <tr><td>TEXTO_LEGAL</td><td>varchar(500)</td></tr>
+        <tr><td>ID_FISCAL</td><td>bigint</td></tr>
+        <tr><td>ID_FISCAL_ITEM</td><td>int</td></tr>
+        <tr><td>SUB_ITEM_TAMANHO</td><td>int</td></tr>
+        <tr><td>ITEM_NOTA</td><td>int</td></tr>
+        <tr><td>COD_MATRIZ_CONTABIL</td><td>char(6)</td></tr>
+        <tr><td>MATRIZ_CONTABIL</td><td>varchar(25)</td></tr>
+        <tr><td>ID_EXCECAO_IMPOSTO</td><td>int</td></tr>
+        <tr><td>SITUACAO_TRIBUTARIA</td><td>char(4)</td></tr>
+        <tr><td>ORIGEM_ITEM</td><td>char(1)</td></tr>
+        <tr><td>CODIGO_BENEFICIO_FISCAL</td><td>varchar(15)</td></tr>
+    </table>
+<p>
+<p><strong>Parâmetros:</strong></p>
+<li>recebimentoInicio</li>
+<li>recebimentoFim</li>
+    </p>
+
+<p><strong>Endpoint:</strong></p>
+<li style="color: red;">GET http://rosset39b:91/RegistroEntrada</li>
 
 </ul>
 
