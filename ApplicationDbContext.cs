@@ -27,6 +27,7 @@ namespace RelatoriosRosset
             modelBuilder.Entity<RegistroSaidaModel>().HasNoKey();
             modelBuilder.Entity<RegistroEntradaModel>().HasNoKey();
             modelBuilder.Entity<EANPorSaidaModel>().HasNoKey();
+            modelBuilder.Entity<LivroEntradaModel>().HasNoKey();
         }
 
 
@@ -51,7 +52,7 @@ namespace RelatoriosRosset
         public DbSet<RegistroSaidaModel> W_LF_REGISTRO_SAIDA_IMPOSTO_ITEM { get; set; }
         public DbSet<RegistroEntradaModel> W_LF_REGISTRO_ENTRADA_IMPOSTO_ITEM { get; set; }
         public DbSet<EANPorSaidaModel> EAN_POR_SAIDA { get; set; }
-
+        
     }
 
 }

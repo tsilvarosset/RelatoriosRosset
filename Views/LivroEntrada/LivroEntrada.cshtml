@@ -1,0 +1,118 @@
+﻿@model IEnumerable<RelatoriosRosset.Models.LivroEntradaModel>
+@{
+    ViewData["Title"] = "Pesquisa de Notas";
+}
+
+<h2>Livro de Entradas</h2>
+
+<form asp-action="LivroEntrada" method="get" class="mb-4">
+    <div class="row">
+        <div class="col-md-3">
+            <label for="dataInicio">Data Início</label>
+            <input type="date" name="dataInicio" class="form-control"
+                   value="@(ViewBag.DataInicio?.ToString("yyyy-MM-dd"))" />
+        </div>
+        <div class="col-md-3">
+            <label for="dataFim">Data Fim</label>
+            <input type="date" name="dataFim" class="form-control"
+                   value="@(ViewBag.DataFim?.ToString("yyyy-MM-dd"))" />
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12 text-end">
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+
+            <a asp-action="ExportarExcel"
+               asp-route-dataInicio="@ViewBag.DataInicio?.ToString("yyyy-MM-dd")"
+               asp-route-dataFim="@ViewBag.DataFim?.ToString("yyyy-MM-dd")"
+               
+               class="btn btn-success">Gerar Relatório em Excel</a>
+        </div>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>FILIAL ORIGEM</th>
+                <th>FILIAL ENTRADA</th>
+                <th>NF ENTRADA</th>
+                <th>SERIE NF ENTRADA</th>
+                <th>SERIE NF OFICIAL</th>
+                <th>IMPOSTO</th>
+                <th>VALOR CONTABIL</th>
+                <th>BASE IMPOSTO</th>
+                <th>TAXA IMPOSTO</th>
+                <th>VALOR IMPOSTO</th>
+                <th>VALOR IMPOSTO OUTROS</th>
+                <th>VALOR IMPOSTO ISENTO</th>
+                <th>CODIGO FISCAL OPERACAO</th>
+                <th>DENOMINACAO CFOP</th>
+                <th>RECEBIMENTO</th>
+                <th>EMISSAO</th>
+                <th>CODIGO ITEM</th>
+                <th>QTDE ITEM</th>
+                <th>PRECO UNITARIO</th>
+                <th>VALOR BRUTO ITEM</th>
+                <th>DESCRICAO ITEM</th>
+                <th>UNIDADE</th>
+                <th>CLASSIF FISCAL</th>
+                <th>CLIENTE VAREJO</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var nota in Model)
+            {
+                <tr>
+
+                    <td>@nota.FILIAL_ORIGEM</td>
+                    <td>@nota.FILIAL_ENTRADA</td>
+                    <td>@nota.NF_ENTRADA</td>
+                    <td>@nota.SERIE_NF_ENTRADA</td>
+                    <td>@nota.SERIE_NF_OFICIAL</td>
+                    <td>@nota.IMPOSTO</td>
+                    <td>@nota.VALOR_CONTABIL</td>
+                    <td>@nota.BASE_IMPOSTO</td>
+                    <td>@nota.VALOR_IMPOSTO</td>
+                    <td>@nota.VALOR_IMPOSTO OUTROS</td>
+                    <td>@nota.VALOR_IMPOSTO ISENTO</td>
+                    <td>@nota.CODIGO_FISCAL_OPERACAO</td>
+                    <td>@nota.DENOMINACAO_CFOP</td>
+                    <td>@nota.RECEBIMENTO</td>
+                    <td>@nota.EMISSAO</td>
+                    <td>@nota.CODIGO_ITEM</td>
+                    <td>@nota.QTDE_ITEM</td>
+                    <td>@nota.PRECO_UNITARIO</td>
+                    <td>@nota.VALOR_BRUTO_ITEM</td>
+                    <td>@nota.DESCRICAO_ITEM</td>
+                    <td>@nota.UNIDADE</td>
+                    <td>@nota.CLASSIF_FISCAL</td>
+                    <td>@nota.CLIENTE_VAREJO</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nenhuma nota encontrada para o período selecionado.</p>
+}
+
+@section Scripts {
+    <script>
+        // Opcional: Adicionar validação client-side para garantir que dataFim seja maior que dataInicio
+        document.querySelector('form').addEventListener('submit', function (e) {
+            const dataInicio = document.querySelector('[name="dataInicio"]').value;
+            const dataFim = document.querySelector('[name="dataFim"]').value;
+
+            if (dataInicio && dataFim && new Date(dataFim) < new Date(dataInicio)) {
+                e.preventDefault();
+                alert('A data final deve ser maior ou igual à data inicial.');
+            }
+        });
+    </script>
+}
