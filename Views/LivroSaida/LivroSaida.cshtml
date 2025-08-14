@@ -1,11 +1,11 @@
-﻿@model IEnumerable<RelatoriosRosset.Models.LivroEntradaModel>
+﻿@model IEnumerable<RelatoriosRosset.Models.LivroSaidaModel>
 @{
     ViewData["Title"] = "Pesquisa de Notas";
 }
 
-<h2>Livro de Entradas</h2>
+<h2>Livro de Saídas</h2>
 
-<form asp-action="LivroEntrada" method="get" class="mb-4">
+<form asp-action="LivroSaida" method="get" class="mb-4">
     <div class="row">
         <div class="col-md-3">
             <label for="dataInicio">Data Início</label>
@@ -26,7 +26,6 @@
             <a asp-action="ExportarExcel"
                asp-route-dataInicio="@ViewBag.DataInicio?.ToString("yyyy-MM-dd")"
                asp-route-dataFim="@ViewBag.DataFim?.ToString("yyyy-MM-dd")"
-               
                class="btn btn-success">Gerar Relatório em Excel</a>
         </div>
     </div>
@@ -37,10 +36,11 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>FILIAL ORIGEM</th>
-                <th>FILIAL ENTRADA</th>
-                <th>NF ENTRADA</th>
-                <th>SERIE NF ENTRADA</th>
+                <th>FILIAL</th>
+                <th>NF SAIDA</th>
+                <th>DESTINO CLIENTE</th>
+                <th>DESTINO FILIAL</th>
+                <th>SERIE NF</th>
                 <th>SERIE NF OFICIAL</th>
                 <th>IMPOSTO</th>
                 <th>VALOR CONTABIL</th>
@@ -51,7 +51,6 @@
                 <th>VALOR IMPOSTO ISENTO</th>
                 <th>CODIGO FISCAL OPERACAO</th>
                 <th>DENOMINACAO CFOP</th>
-                <th>RECEBIMENTO</th>
                 <th>EMISSAO</th>
                 <th>CODIGO ITEM</th>
                 <th>QTDE ITEM</th>
@@ -60,18 +59,17 @@
                 <th>DESCRICAO ITEM</th>
                 <th>UNIDADE</th>
                 <th>CLASSIF FISCAL</th>
-                <th>CLIENTE VAREJO</th>
-            </tr>
         </thead>
         <tbody>
             @foreach (var nota in Model)
             {
                 <tr>
 
-                    <td>@nota.FILIAL_ORIGEM</td>
-                    <td>@nota.FILIAL_ENTRADA</td>
-                    <td>@nota.NF_ENTRADA</td>
-                    <td>@nota.SERIE_NF_ENTRADA</td>
+                    <td>@nota.FILIAL</td>
+                    <td>@nota.NF_SAIDA</td>
+                    <td>@nota.DESTINO_CLIENTE</td>
+                    <td>@nota.DESTINO_FILIAL</td>
+                    <td>@nota.SERIE_NF</td>
                     <td>@nota.SERIE_NF_OFICIAL</td>
                     <td>@nota.IMPOSTO</td>
                     <td>@nota.VALOR_CONTABIL</td>
@@ -82,7 +80,6 @@
                     <td>@nota.VALOR_IMPOSTO_ISENTO</td>
                     <td>@nota.CODIGO_FISCAL_OPERACAO</td>
                     <td>@nota.DENOMINACAO_CFOP</td>
-                    <td>@nota.RECEBIMENTO</td>
                     <td>@nota.EMISSAO</td>
                     <td>@nota.CODIGO_ITEM</td>
                     <td>@nota.QTDE_ITEM</td>
@@ -91,7 +88,6 @@
                     <td>@nota.DESCRICAO_ITEM</td>
                     <td>@nota.UNIDADE</td>
                     <td>@nota.CLASSIF_FISCAL</td>
-                    <td>@nota.CLIENTE_VAREJO</td>
 
                 </tr>
             }

@@ -28,6 +28,7 @@ namespace RelatoriosRosset
             modelBuilder.Entity<RegistroEntradaModel>().HasNoKey();
             modelBuilder.Entity<EANPorSaidaModel>().HasNoKey();
             modelBuilder.Entity<LivroEntradaModel>().HasNoKey();
+            modelBuilder.Entity<LivroSaidaModel>().HasNoKey();
         }
 
 

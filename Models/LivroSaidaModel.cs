@@ -1,6 +1,6 @@
 ﻿namespace RelatoriosRosset.Models
 {
-    public class LivroSaida
+    public class LivroSaidaModel
     {
         public string? FILIAL { get; set; }
         public string? NF_SAIDA { get; set; }
