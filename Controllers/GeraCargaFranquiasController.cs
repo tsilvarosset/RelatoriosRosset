@@ -38,16 +38,14 @@ namespace RelatoriosRosset.Controllers
         {
             try
             {
-                // Carregar os dados do banco primeiro
                 var filiaisData = await _context.V_FILIAIS_ATIVAS_FRANQUIAS
                     .OrderBy(f => f.Filial)
                     .ToListAsync();
 
-                // Formatar os dados no lado do cliente
                 var filiais = filiaisData
                     .Select(f => new SelectListItem
                     {
-                        Value = f.Cgc_Cpf,
+                        Value = f.Filial,
                         Text = $"{f.Filial} - CNPJ {f.Cgc_Cpf}"
                     })
                     .ToList();
@@ -75,10 +73,10 @@ namespace RelatoriosRosset.Controllers
         [HttpPost]
         public async Task<IActionResult> ExecutarProcedure(string filial)
         {
-            Console.WriteLine($"Executando ExecutarProcedure com Filial: {filial ?? "Nulo"}");
-            var model = new FiliaisAtivasFModel
+            Console.WriteLine($"Executando ExecutarProcedure com Filial: '{filial}' (Tamanho: {filial?.Length})");
+            var model = new GeraCargaFranquiasModel
             {
-                Filial = filial
+                Filial = filial?.Trim()
             };
 
             if (string.IsNullOrEmpty(filial))
@@ -90,11 +88,22 @@ namespace RelatoriosRosset.Controllers
 
             try
             {
+                var filialExists = await _context.V_FILIAIS_ATIVAS_FRANQUIAS
+                    .AnyAsync(f => f.Filial == filial);
+                if (!filialExists)
+                {
+                    model.Mensagem = $"Filial '{filial}' não encontrada.";
+                    await CarregarFiliais();
+                    return View("GeraCargaFranquias", model);
+                }
+
                 using var connection = new SqlConnection(_context.Database.GetConnectionString());
                 await connection.OpenAsync();
+                //using var transaction = await connection.BeginTransactionAsync();
 
                 using var command = connection.CreateCommand();
-                command.CommandTimeout = 1200000;
+                //command.Transaction = transaction;
+                command.CommandTimeout = 300000;
                 command.CommandText = "GERA_CARGA_INVENT_FRANQUIAS @Filial";
                 command.Parameters.Add(new SqlParameter
                 {
@@ -104,10 +113,19 @@ namespace RelatoriosRosset.Controllers
                 });
 
                 await command.ExecuteNonQueryAsync();
+
+                var dados = await _context.TABELA_CARGA_INV_FRANQUIAS.ToListAsync();
+                Console.WriteLine($"Registros inseridos na tabela: {dados.Count}");
+                foreach (var item in dados)
+                {
+                    Console.WriteLine($"Produto: {item.Produto}");
+                }
+
+                //await transaction.CommitAsync();
                 model.Mensagem = "Saldo Gerado com sucesso!";
                 Console.WriteLine("Saldo Gerado com sucesso!");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 model.Mensagem = $"Erro ao executar a procedure: {ex.Message}. StackTrace: {ex.StackTrace}";
                 Console.WriteLine($"Erro ao executar a procedure: {ex.Message}\n{ex.StackTrace}");
@@ -122,76 +140,48 @@ namespace RelatoriosRosset.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GerarArquivoTxt(string filial)
+        public async Task<IActionResult> GerarArquivoTxt()
         {
-            Console.WriteLine($"Executando GerarArquivoTxt com Filial: {filial ?? "Nulo"}");
-            var model = new GeraCargaFranquiasModel
-            {
-                Filial = filial
-            };
-
-            if (string.IsNullOrEmpty(filial))
-            {
-                model.Mensagem = "Por favor, selecione uma filial.";
-                await CarregarFiliais();
-                return View("GeraCargaFranquias", model);
-            }
+            Console.WriteLine("Executando GerarArquivoTxt...");
+            var model = new GeraCargaFranquiasModel();
 
             try
             {
-                // Executar a stored procedure para garantir dados atualizados
-                using var connection = new SqlConnection(_context.Database.GetConnectionString());
-                await connection.OpenAsync();
-
-                using var command = connection.CreateCommand();
-                command.CommandTimeout = 1200000;
-                command.CommandText = "GERA_CARGA_INVENT_FRANQUIAS @Filial";
-                command.Parameters.Add(new SqlParameter
-                {
-                    ParameterName = "@Filial",
-                    SqlDbType = SqlDbType.NVarChar,
-                    Value = filial
-                });
-
-                await command.ExecuteNonQueryAsync();
-                Console.WriteLine("Stored procedure executada com sucesso em GerarArquivoTxt");
-
-                // Consultar a tabela TABELA_CARGA_INV_FRANQUIAS
+                // Consultar os dados da tabela TABELA_CARGA_INV_FRANQUIAS
                 var dados = await _context.TABELA_CARGA_INV_FRANQUIAS
-                    .Select(f => new
-                    {
-                        f.Produto
-                    })
+                    .Select(f => new { f.Produto })
                     .ToListAsync();
+                Console.WriteLine($"Registros encontrados na tabela: {dados.Count}");
+                foreach (var item in dados)
+                {
+                    Console.WriteLine($"Produto: {item.Produto}");
+                }
 
-                Console.WriteLine($"Registros encontrados: {dados.Count}");
+                if (!dados.Any())
+                {
+                    model.Mensagem = "Nenhum dado encontrado na tabela para gerar o arquivo.";
+                    await CarregarFiliais();
+                    return View("GeraCargaFranquias", model);
+                }
 
-                // Definir caminho e nome do arquivo
-                string fileName = $"Inventario_Franquias_{filial}_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
+                // Gerar arquivo
+                string fileName = $"Inventario_Franquias_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
                 string filePath = Path.Combine(Path.GetTempPath(), fileName);
                 Console.WriteLine($"Gerando arquivo em: {filePath}");
 
-                // Criar e escrever no arquivo TXT
                 using (var writer = new StreamWriter(filePath))
                 {
-                    // Escrever cabeçalho
                     await writer.WriteLineAsync("Produto");
-
-                    // Escrever dados
                     foreach (var item in dados)
                     {
-                        string linha = $"{item.Produto}";
-                        await writer.WriteLineAsync(linha);
+                        await writer.WriteLineAsync(item.Produto);
                     }
                 }
 
-                // Retornar o arquivo para download
                 var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
-                System.IO.File.Delete(filePath); // Remove o arquivo temporário após leitura
+                System.IO.File.Delete(filePath);
 
-                // Carregar filiais para a view
                 await CarregarFiliais();
-
                 model.Mensagem = "Arquivo TXT gerado com sucesso!";
                 return File(fileBytes, "text/plain", fileName);
             }

@@ -1,6 +1,4 @@
-﻿@model RelatoriosRosset.Models.GeraCargaFranquiasModel
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>Gerar Carga de Franquias</title>
@@ -16,6 +14,11 @@
 
         .alert {
             margin-top: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px; /* Espaçamento entre os botões */
         }
     </style>
 </head>
@@ -33,32 +36,15 @@
             <div class="alert alert-danger">@TempData["Erro"]</div>
         }
 
-        <form asp-action="ExecutarProcedure" method="post">
-            <div class="form-group">
-                <label for="filial">Selecione a Filial:</label>
-                <select name="filial" class="form-control">
-                    <option value="">Selecione uma filial</option>
-                    @foreach (var item in ViewBag.V_FILIAIS_ATIVAS_FRANQUIAS)
-                    {
-                        <option value="@item.Value" selected="@(item.Value == Model?.Filial ? "selected" : null)">@item.Text</option>
-                    }
-                </select>
+        <form asp-action="ExecutarProcedure" method="post" class="form-group">
+            <label for="filial">Selecione a Filial:</label>
+            <select name="filial" asp-items="@ViewBag.V_FILIAIS_ATIVAS_FRANQUIAS" class="form-control">
+                <option value="">Selecione uma filial</option>
+            </select>
+            <div class="button-group mt-3">
+                <button type="submit" class="btn btn-primary">Gerar Saldo</button>
+                <button type="submit" formaction="@Url.Action("GerarArquivoTxt")" class="btn btn-success" @(string.IsNullOrEmpty(Model?.Mensagem) || Model.Mensagem != "Saldo Gerado com sucesso!" ? "disabled" : "")>Gerar Arquivo TXT</button>
             </div>
-            <button type="submit" class="btn btn-primary">Executar Procedure</button>
-        </form>
-
-        <form asp-action="GerarArquivoTxt" method="post">
-            <div class="form-group">
-                <label for="filial">Selecione a Filial para TXT:</label>
-                <select name="filial" class="form-control">
-                    <option value="">Selecione uma filial</option>
-                    @foreach (var item in ViewBag.V_FILIAIS_ATIVAS_FRANQUIAS)
-                    {
-                        <option value="@item.Value" selected="@(item.Value == Model?.Filial ? "selected" : null)">@item.Text</option>
-                    }
-                </select>
-            </div>
-            <button type="submit" class="btn btn-success">Gerar Arquivo TXT</button>
         </form>
     </div>
 </body>
