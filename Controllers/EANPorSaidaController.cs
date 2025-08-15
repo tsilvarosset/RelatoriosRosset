@@ -93,7 +93,7 @@ namespace RelatoriosRosset.Controllers
                     query = query.Where(v => v.EMISSAO <= emissao.Value);
                 }
 
-                var saida = await query.OrderBy(v => v.EMISSAO).ToListAsync();
+                var saida = await query.OrderBy(v => v.NF_NUMERO).ToListAsync();
                 if (!saida.Any())
                 {
                     TempData["Erro"] = "Nenhum dado disponível para exportar.";

@@ -1,0 +1,65 @@
+﻿@model RelatoriosRosset.Models.GeraCargaFranquiasModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gerar Carga de Franquias</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .alert {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Gerar Carga de Franquias</h2>
+
+        @if (!string.IsNullOrEmpty(Model?.Mensagem))
+        {
+            <div class="alert alert-info">@Model.Mensagem</div>
+        }
+
+        @if (TempData["Erro"] != null)
+        {
+            <div class="alert alert-danger">@TempData["Erro"]</div>
+        }
+
+        <form asp-action="ExecutarProcedure" method="post">
+            <div class="form-group">
+                <label for="filial">Selecione a Filial:</label>
+                <select name="filial" class="form-control">
+                    <option value="">Selecione uma filial</option>
+                    @foreach (var item in ViewBag.V_FILIAIS_ATIVAS_FRANQUIAS)
+                    {
+                        <option value="@item.Value" selected="@(item.Value == Model?.Filial ? "selected" : null)">@item.Text</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Executar Procedure</button>
+        </form>
+
+        <form asp-action="GerarArquivoTxt" method="post">
+            <div class="form-group">
+                <label for="filial">Selecione a Filial para TXT:</label>
+                <select name="filial" class="form-control">
+                    <option value="">Selecione uma filial</option>
+                    @foreach (var item in ViewBag.V_FILIAIS_ATIVAS_FRANQUIAS)
+                    {
+                        <option value="@item.Value" selected="@(item.Value == Model?.Filial ? "selected" : null)">@item.Text</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">Gerar Arquivo TXT</button>
+        </form>
+    </div>
+</body>
+</html>

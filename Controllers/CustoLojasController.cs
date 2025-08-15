@@ -21,15 +21,14 @@ namespace RelatoriosRosset.Controllers
         public CustoLojasController(ApplicationDbContext context)
         {
             _context = context;
-            //ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            
         }
 
-        // GET: Exibe a view com o formulário
+        
         public async Task<IActionResult> Index()
         {
             var model = new CustoLojasViewModel();
             await CarregarFiliais(); // Carrega as filiais do banco
-            //Console.WriteLine($"Filiais no Index: {((List<SelectListItem>)ViewBag.FILIAIS).Count}");
             return View(model);
 
         }
@@ -191,7 +190,7 @@ namespace RelatoriosRosset.Controllers
                         VL_ICMS_OP AS VlIcmsOp
                     FROM TABELA_CUSTO_EAN
                     WHERE TRY_CAST(ITEM AS INT) IS NOT NULL
-                        AND TRY_CAST(ITEM_COMPOSICAO AS INT) IS NOT NULL";
+                        AND TRY_CAST(ITEM_COMPOSICAO AS INT) IS NOT NULL ORDER BY PRODUTO ";
 
                 using var reader = await command.ExecuteReaderAsync();
                 while (await reader.ReadAsync())

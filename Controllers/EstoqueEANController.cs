@@ -94,7 +94,7 @@ namespace RelatoriosRosset.Controllers
                     query = query.Where(v => v.DATA_SALDO <= dataSaldo.Value);
                 }
 
-                var estoque = await query.OrderBy(v => v.DATA_SALDO).ToListAsync();
+                var estoque = await query.OrderBy(v => v.FILIAL).ToListAsync();
                 if (!estoque.Any())
                 {
                     TempData["Erro"] = "Nenhum dado disponível para exportar.";

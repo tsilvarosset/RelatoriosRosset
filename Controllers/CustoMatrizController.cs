@@ -109,7 +109,7 @@ namespace RelatoriosRosset.Controllers
                         VALOR_BRUTO AS ValorBrut
                     FROM TABELA_CUSTO_EAN_MATRIZ
                     WHERE TRY_CAST(ITEM AS INT) IS NOT NULL
-                        AND TRY_CAST(ITEM_COMPOSICAO AS INT) IS NOT NULL";
+                        AND TRY_CAST(ITEM_COMPOSICAO AS INT) IS NOT NULL ORDER BY FILIAL, PRODUTO ";
 
                 using var reader = await command.ExecuteReaderAsync();
                 while (await reader.ReadAsync())

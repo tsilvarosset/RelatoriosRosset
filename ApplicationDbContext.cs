@@ -20,7 +20,7 @@ namespace RelatoriosRosset
             .ToTable("LOJA_NOTA_FISCAL"); 
 
             modelBuilder.Entity<FiliaisAtivasPModel>().HasNoKey();
-            modelBuilder.Entity<FiliaisAtivasFModel>().HasNoKey();
+            //modelBuilder.Entity<FiliaisAtivasFModel>().HasNoKey();
             modelBuilder.Entity<EstoqueEANModel>().HasNoKey();
             modelBuilder.Entity<EntradasFModel>().HasNoKey();
             modelBuilder.Entity<SaidasFModel>().HasNoKey();
@@ -29,6 +29,10 @@ namespace RelatoriosRosset
             modelBuilder.Entity<EANPorSaidaModel>().HasNoKey();
             modelBuilder.Entity<LivroEntradaModel>().HasNoKey();
             modelBuilder.Entity<LivroSaidaModel>().HasNoKey();
+            //modelBuilder.Entity<GeraCargaFranquiasModel>().HasNoKey();
+
+            modelBuilder.Entity<FiliaisAtivasFModel>().HasNoKey().ToView("V_FILIAIS_ATIVAS_FRANQUIAS");
+            modelBuilder.Entity<GeraCargaFranquiasModel>().HasNoKey().ToTable("TABELA_CARGA_INV_FRANQUIAS");
         }
 
 
@@ -53,7 +57,8 @@ namespace RelatoriosRosset
         public DbSet<RegistroSaidaModel> W_LF_REGISTRO_SAIDA_IMPOSTO_ITEM { get; set; }
         public DbSet<RegistroEntradaModel> W_LF_REGISTRO_ENTRADA_IMPOSTO_ITEM { get; set; }
         public DbSet<EANPorSaidaModel> EAN_POR_SAIDA { get; set; }
-        
+        public DbSet<GeraCargaFranquiasModel> TABELA_CARGA_INV_FRANQUIAS { get; set; }
+
     }
 
 }

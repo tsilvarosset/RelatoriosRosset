@@ -59,7 +59,7 @@ namespace RelatoriosRosset.Controllers
                     query = query.Where(v => v.DATA_VENDA <= dataFim.Value);
                 }
 
-                var lojaVendas = await query.OrderBy(v => v.DATA_VENDA).ToListAsync();
+                var lojaVendas = await query.OrderBy(v => v.FILIAL).ToListAsync();
 
                 if (!lojaVendas.Any())
                 {

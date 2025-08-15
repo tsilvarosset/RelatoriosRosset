@@ -14,6 +14,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th>CNPJ</th>
                 <th>Filial</th>
             </tr>
         </thead>
@@ -21,7 +22,7 @@
             @foreach (var loja in Model)
             {
                 <tr>
-                    
+                    <td>@loja.Cgc_Cpf</td>
                     <td>@loja.Filial</td>
 
                 </tr>

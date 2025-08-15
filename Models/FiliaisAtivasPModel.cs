@@ -2,7 +2,8 @@
 {
     public class FiliaisAtivasPModel
     {
-       public string Filial { get; set; }
+        public string Cgc_Cpf { get; set; }
+        public string Filial { get; set; }
     }
 
 }

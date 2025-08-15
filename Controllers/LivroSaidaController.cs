@@ -72,7 +72,7 @@ namespace RelatoriosRosset.Controllers
                     query = query.Where(v => v.EMISSAO <= dataFim.Value);
 
                 var notas = query
-                    .OrderBy(v => v.EMISSAO)
+                    .OrderBy(v => v.FILIAL)
                     .Select(v => new LivroSaidaModel
                     {
                         FILIAL = v.FILIAL,

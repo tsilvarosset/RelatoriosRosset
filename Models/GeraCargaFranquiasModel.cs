@@ -2,12 +2,12 @@
 
 namespace RelatoriosRosset.Models
 {
-    public class FiliaisAtivasFModel
+    public class GeraCargaFranquiasModel
     {
-        public string Cgc_Cpf { get; set; }
-        public string Filial { get; set; }
+        public string Produto { get; set; }
         [NotMapped]
         public string Mensagem { get; set; }
-
+        [NotMapped]
+        public string Filial { get; set; }
     }
 }

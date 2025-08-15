@@ -106,7 +106,7 @@ namespace RelatoriosRosset.Controllers
                     query = query.Where(v => v.RECEBIMENTO <= dataFim.Value);
                 }
 
-                var entradas = await query.OrderBy(v => v.RECEBIMENTO).ToListAsync();
+                var entradas = await query.OrderBy(v => v.NF_ENTRADA).ToListAsync();
 
                 if (!entradas.Any())
                 {
