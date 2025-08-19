@@ -29,7 +29,10 @@ namespace RelatoriosRosset.Controllers
                 query = query.Where(v => v.DATA_VENDA <= dataFim.Value);
             }
 
-            var lojaVendas = await query.OrderByDescending(v => v.DATA_VENDA).Take(10).ToListAsync();
+            var lojaVendas = await query.OrderByDescending(v => v.DATA_VENDA)
+                .ThenByDescending(V => V.VALOR_PAGO)
+                .Take(10)
+                .ToListAsync();
             ViewBag.DataInicio = dataInicio;
             ViewBag.DataFim = dataFim;
 
