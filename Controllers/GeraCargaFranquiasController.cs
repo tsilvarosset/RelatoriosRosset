@@ -125,6 +125,7 @@ namespace RelatoriosRosset.Controllers
                 model.Mensagem = "Saldo Gerado com sucesso!";
                 Console.WriteLine("Saldo Gerado com sucesso!");
             }
+
             catch (Exception ex)
             {
                 model.Mensagem = $"Erro ao executar a procedure: {ex.Message}. StackTrace: {ex.StackTrace}";

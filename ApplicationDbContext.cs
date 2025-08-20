@@ -32,6 +32,8 @@ namespace RelatoriosRosset
             modelBuilder.Entity<FiliaisAtivasFModel>().HasNoKey().ToView("V_FILIAIS_ATIVAS_FRANQUIAS");
             modelBuilder.Entity<GeraCargaFranquiasModel>().HasNoKey().ToTable("TABELA_CARGA_INV_FRANQUIAS");
             modelBuilder.Entity<TicketsNotasModel>().HasNoKey();
+            modelBuilder.Entity<FiliaisAtivasPModel>().HasNoKey().ToView("V_FILIAIS_ATIVAS_PROPRIAS");
+            modelBuilder.Entity<GeraCargaPropriasModel>().HasNoKey().ToTable("TABELA_CARGA_INV_PROPRIAS");
         }
 
 
@@ -58,6 +60,7 @@ namespace RelatoriosRosset
         public DbSet<EANPorSaidaModel> EAN_POR_SAIDA { get; set; }
         public DbSet<GeraCargaFranquiasModel> TABELA_CARGA_INV_FRANQUIAS { get; set; }
         public DbSet<TicketsNotasModel> V_TICKETS_NOTAS { get; set; }
+        public DbSet<GeraCargaPropriasModel> TABELA_CARGA_INV_PROPRIAS { get; set; }
 
     }
 

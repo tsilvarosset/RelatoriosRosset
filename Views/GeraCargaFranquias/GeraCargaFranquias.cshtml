@@ -41,6 +41,7 @@
             <select name="filial" asp-items="@ViewBag.V_FILIAIS_ATIVAS_FRANQUIAS" class="form-control">
                 <option value="">Selecione uma filial</option>
             </select>
+
             <div class="button-group mt-3">
                 <button type="submit" class="btn btn-primary">Gerar Saldo</button>
                 <button type="submit" formaction="@Url.Action("GerarArquivoTxt")" class="btn btn-success" @(string.IsNullOrEmpty(Model?.Mensagem) || Model.Mensagem != "Saldo Gerado com sucesso!" ? "disabled" : "")>Gerar Arquivo TXT</button>
