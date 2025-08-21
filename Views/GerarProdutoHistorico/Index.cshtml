@@ -1,0 +1,54 @@
+﻿@model RelatoriosRosset.Models.GerarProdutoHistoricoModel
+@{
+    ViewData["Title"] = "Gerar Saldo Histórico";
+    var dataSaldo = Model.DATA_SALDO == DateTime.MinValue ? DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") : Model.DATA_SALDO.ToString();
+
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (!string.IsNullOrEmpty(Model.Mensagem))
+{
+    <div class="alert @(Model.Mensagem.Contains("Erro") ? "alert-danger" : "alert-success")" role="alert">
+        @Model.Mensagem
+    </div>
+}
+
+@if (TempData["Erro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Erro"]
+    </div>
+}
+
+<form asp-controller="GerarProdutoHistorico" asp-action="ExecutarProcedure" method="post">
+    <div class="form-group mb-3">
+        <label for="dataSaldo" class="form-label">Data Saldo:</label>
+        <input type="date" class="form-control" id="dataSaldo" name="dataSaldo" value="@dataSaldo" required />
+    </div>
+    
+    <div class="form-group mb-3">
+        <label for="filial" class="form-label">Selecione a Filial:</label>
+        @if (ViewBag.V_FILIAIS_ATIVAS_PROPRIAS != null && ((List<SelectListItem>)ViewBag.V_FILIAIS_ATIVAS_PROPRIAS).Any())
+        {
+            @Html.DropDownListFor(model => model.FILIAL, (List<SelectListItem>)ViewBag.V_FILIAIS_ATIVAS_PROPRIAS, "Selecione a Filial", new { @class = "form-control", required = "required" })
+        }
+        else
+        {
+            <select class="form-control" disabled>
+                <option>Nenhuma filial disponível</option>
+            </select>
+            <small class="text-danger">Erro ao carregar filiais. Verifique a conexão com o banco de dados.</small>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Gerar Saldo</button>
+    
+</form>
+
+@section Scripts {
+    <script>
+        // Validação client-side para datas
+        
+    </script>
+}

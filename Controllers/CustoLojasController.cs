@@ -23,8 +23,6 @@ namespace RelatoriosRosset.Controllers
             _context = context;
             
         }
-
-        
         public async Task<IActionResult> Index()
         {
             var model = new CustoLojasViewModel();

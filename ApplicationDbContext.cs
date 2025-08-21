@@ -34,6 +34,7 @@ namespace RelatoriosRosset
             modelBuilder.Entity<TicketsNotasModel>().HasNoKey();
             modelBuilder.Entity<FiliaisAtivasPModel>().HasNoKey().ToView("V_FILIAIS_ATIVAS_PROPRIAS");
             modelBuilder.Entity<GeraCargaPropriasModel>().HasNoKey().ToTable("TABELA_CARGA_INV_PROPRIAS");
+            modelBuilder.Entity<GerarProdutoHistoricoModel>().HasNoKey();
         }
 
 
@@ -61,6 +62,7 @@ namespace RelatoriosRosset
         public DbSet<GeraCargaFranquiasModel> TABELA_CARGA_INV_FRANQUIAS { get; set; }
         public DbSet<TicketsNotasModel> V_TICKETS_NOTAS { get; set; }
         public DbSet<GeraCargaPropriasModel> TABELA_CARGA_INV_PROPRIAS { get; set; }
+        public DbSet<GerarProdutoHistoricoModel> ESTOQUE_PRODUTOS_HISTORICO { get; set; }
 
     }
 
