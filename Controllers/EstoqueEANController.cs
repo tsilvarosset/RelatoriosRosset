@@ -106,12 +106,12 @@ namespace RelatoriosRosset.Controllers
                     var worksheet = workbook.Worksheets.Add("Estoque");
 
                     // Add headers
-                    worksheet.Cell(1, 1).Value = "Filial";
-                    worksheet.Cell(1, 2).Value = "Código de Barras";
-                    worksheet.Cell(1, 3).Value = "Produto";
-                    worksheet.Cell(1, 4).Value = "Estoque";
-                    worksheet.Cell(1, 5).Value = "Último Custo";
-                    worksheet.Cell(1, 6).Value = "Data Saldo";
+                    worksheet.Cell(1, 1).Value = "FILIAL";
+                    worksheet.Cell(1, 2).Value = "CODIGO DE BARRAS";
+                    worksheet.Cell(1, 3).Value = "PRODUTO";
+                    worksheet.Cell(1, 4).Value = "ESTOQUE";
+                    worksheet.Cell(1, 5).Value = "ULTIMO CUSTO";
+                    worksheet.Cell(1, 6).Value = "DATA SALDO";
 
                     // Add data
                     for (int i = 0; i < estoque.Count; i++)

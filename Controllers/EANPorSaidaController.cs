@@ -104,7 +104,7 @@ namespace RelatoriosRosset.Controllers
                 {
                     var worksheet = workbook.Worksheets.Add("Saidas");
 
-                    worksheet.Cell(1, 1).Value = "NF_NUMERO";
+                    worksheet.Cell(1, 1).Value = "NF NUMERO";
                     worksheet.Cell(1, 2).Value = "SERIE";
                     worksheet.Cell(1, 3).Value = "PRODUTO";
                     worksheet.Cell(1, 4).Value = "CODIGO BARRA";
@@ -116,7 +116,7 @@ namespace RelatoriosRosset.Controllers
                     worksheet.Cell(1, 10).Value = "VALOR TOTAL";
                     worksheet.Cell(1, 11).Value = "VALOR ICMS";
                     worksheet.Cell(1, 12).Value = "CODIGO FISCAL OPERACAO";
-                    worksheet.Cell(1, 13).Value = "CHAVE_NFE";
+                    worksheet.Cell(1, 13).Value = "CHAVE NFE";
 
                     for (int i = 0; i < saida.Count; i++)
                     {

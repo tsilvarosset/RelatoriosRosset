@@ -70,9 +70,9 @@ namespace RelatoriosRosset.Controllers
                     worksheet.Cell(1, 2).Value = "DATA";
                     worksheet.Cell(1, 3).Value = "TICKET";
                     worksheet.Cell(1, 4).Value = "VALOR_PAGO";
-                    worksheet.Cell(1, 5).Value = "NUMERO_FISCAL_VENDA";
-                    worksheet.Cell(1, 6).Value = "NUMERO_FISCAL_TROCA";
-                    worksheet.Cell(1, 7).Value = "NUMERO_FISCAL_CANCELAMENTO";
+                    worksheet.Cell(1, 5).Value = "NUMERO FISCAL VENDA";
+                    worksheet.Cell(1, 6).Value = "NUMERO FISCAL TROCA";
+                    worksheet.Cell(1, 7).Value = "NUMERO FISCAL CANCELAMENTO";
 
                     // Adicionar dados
                     for (int i = 0; i < tickets.Count; i++)

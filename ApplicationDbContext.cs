@@ -35,6 +35,9 @@ namespace RelatoriosRosset
             modelBuilder.Entity<FiliaisAtivasPModel>().HasNoKey().ToView("V_FILIAIS_ATIVAS_PROPRIAS");
             modelBuilder.Entity<GeraCargaPropriasModel>().HasNoKey().ToTable("TABELA_CARGA_INV_PROPRIAS");
             modelBuilder.Entity<GerarProdutoHistoricoModel>().HasNoKey();
+            modelBuilder.Entity<LojaCaixaCartaoModel>().HasNoKey();
+            modelBuilder.Entity<VendasOmniPModel>().HasNoKey();
+            modelBuilder.Entity<VendasOmniFModel>().HasNoKey();
         }
 
 
@@ -42,7 +45,8 @@ namespace RelatoriosRosset
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            Database.SetCommandTimeout(12000000); // Aumenta o timeout para 120 segundos
+            //Database.SetCommandTimeout(12000000); // Aumenta o timeout para 120 segundos
+            Database.SetCommandTimeout(300); // Timeout de 30 segundos
         }
 
         public DbSet<LojaVendaModel> V_VENDAS_PROPRIAS { get; set; }
@@ -63,6 +67,9 @@ namespace RelatoriosRosset
         public DbSet<TicketsNotasModel> V_TICKETS_NOTAS { get; set; }
         public DbSet<GeraCargaPropriasModel> TABELA_CARGA_INV_PROPRIAS { get; set; }
         public DbSet<GerarProdutoHistoricoModel> ESTOQUE_PRODUTOS_HISTORICO { get; set; }
+        public DbSet<LojaCaixaCartaoModel> V_LANCAMENTOS_CAIXA_CARTAO { get; set; }
+        public DbSet<VendasOmniPModel> V_VENDAS_OMNI_P { get; set; }
+        public DbSet<VendasOmniFModel> V_VENDAS_OMNI_F { get; set; }
 
     }
 

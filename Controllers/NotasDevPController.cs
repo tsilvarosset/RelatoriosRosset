@@ -77,14 +77,14 @@ namespace RelatoriosRosset.Controllers
                     var worksheet = workbook.Worksheets.Add("Notas");
 
                     // Adicionar cabeçalhos
-                    worksheet.Cell(1, 1).Value = "Filial";
-                    worksheet.Cell(1, 2).Value = "Número NF";
-                    worksheet.Cell(1, 3).Value = "Emissão";
-                    worksheet.Cell(1, 4).Value = "Valor Total";
-                    worksheet.Cell(1, 5).Value = "Natureza Operação";
+                    worksheet.Cell(1, 1).Value = "FILIAL";
+                    worksheet.Cell(1, 2).Value = "NUMERO NF";
+                    worksheet.Cell(1, 3).Value = "EMISSAO";
+                    worksheet.Cell(1, 4).Value = "VALOR TOTAL";
+                    worksheet.Cell(1, 5).Value = "NATUREZA OPERACAO";
                     worksheet.Cell(1, 6).Value = "CPF/CNPJ";
-                    worksheet.Cell(1, 7).Value = "Cliente Varejo";
-                    worksheet.Cell(1, 8).Value = "Chave NFE";
+                    worksheet.Cell(1, 7).Value = "CLIENTE VAREJO";
+                    worksheet.Cell(1, 8).Value = "CHAVE NFE";
 
                     // Adicionar dados
                     for (int i = 0; i < notasF.Count; i++)

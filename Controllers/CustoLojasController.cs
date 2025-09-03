@@ -236,30 +236,30 @@ namespace RelatoriosRosset.Controllers
                 var worksheet = workbook.Worksheets.Add("CustoLojas");
 
                 // Headers
-                worksheet.Cell(1, 1).Value = "Item";
-                worksheet.Cell(1, 2).Value = "Descrição Item Composição";
-                worksheet.Cell(1, 3).Value = "Item Composição";
-                worksheet.Cell(1, 4).Value = "Produto";
-                worksheet.Cell(1, 5).Value = "Cor Produto";
-                worksheet.Cell(1, 6).Value = "Grade";
-                worksheet.Cell(1, 7).Value = "Código de Barra";
-                worksheet.Cell(1, 8).Value = "Quantidade";
-                worksheet.Cell(1, 9).Value = "Valor Custo";
-                worksheet.Cell(1, 10).Value = "Documento";
-                worksheet.Cell(1, 11).Value = "Romaneio Produto";
-                worksheet.Cell(1, 12).Value = "Série NF";
+                worksheet.Cell(1, 1).Value = "ITEM";
+                worksheet.Cell(1, 2).Value = "DESCRIÇÃO ITEM COMPOSIÇÃO";
+                worksheet.Cell(1, 3).Value = "ITEM COMPOSIÇÃO";
+                worksheet.Cell(1, 4).Value = "PRODUTO";
+                worksheet.Cell(1, 5).Value = "COR PRODUTO";
+                worksheet.Cell(1, 6).Value = "GRADE";
+                worksheet.Cell(1, 7).Value = "CÓDIGO DE BARRA";
+                worksheet.Cell(1, 8).Value = "QUANTIDADE";
+                worksheet.Cell(1, 9).Value = "VALOR CUSTO";
+                worksheet.Cell(1, 10).Value = "DOCUMENTO";
+                worksheet.Cell(1, 11).Value = "ROMANEIO PRODUTO";
+                worksheet.Cell(1, 12).Value = "SÉRIE NF";
                 worksheet.Cell(1, 13).Value = "CFOP";
-                worksheet.Cell(1, 14).Value = "Descrição CFOP";
-                worksheet.Cell(1, 15).Value = "Filial";
-                worksheet.Cell(1, 16).Value = "Rateio Filial";
-                worksheet.Cell(1, 17).Value = "Data Movimento";
-                worksheet.Cell(1, 18).Value = "Total Quantidade";
-                worksheet.Cell(1, 19).Value = "Valor Total";
-                worksheet.Cell(1, 20).Value = "Valor Imposto Destacar";
-                worksheet.Cell(1, 21).Value = "Valor Líquido";
-                worksheet.Cell(1, 22).Value = "Valor Produção";
-                worksheet.Cell(1, 23).Value = "Valor Bruto";
-                worksheet.Cell(1, 24).Value = "Valor ICMS Operação";
+                worksheet.Cell(1, 14).Value = "DESCRIÇÃO CFOP";
+                worksheet.Cell(1, 15).Value = "FILIAL";
+                worksheet.Cell(1, 16).Value = "RATEIO FILIALl";
+                worksheet.Cell(1, 17).Value = "DATA MOVIMENTO";
+                worksheet.Cell(1, 18).Value = "TOTAL QUANTIDADE";
+                worksheet.Cell(1, 19).Value = "VALOR TOTAL";
+                worksheet.Cell(1, 20).Value = "VALOR IMPOSTO DESTACAR";
+                worksheet.Cell(1, 21).Value = "VALOR LÍQUIDO";
+                worksheet.Cell(1, 22).Value = "VALOR PRODUÇÃO";
+                worksheet.Cell(1, 23).Value = "VALOR BRUTO";
+                worksheet.Cell(1, 24).Value = "VALOR ICMS OPERAÇÃO";
 
                 // Data
                 for (int i = 0; i < resultados.Count; i++)

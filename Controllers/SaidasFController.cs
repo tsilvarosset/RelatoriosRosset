@@ -118,17 +118,17 @@ namespace RelatoriosRosset.Controllers
                     var worksheet = workbook.Worksheets.Add("Saidas");
 
                     // Add headers
-                    worksheet.Cell(1, 1).Value = "Filial";
-                    worksheet.Cell(1, 2).Value = "Destino";
-                    worksheet.Cell(1, 3).Value = "NF Saida";
-                    worksheet.Cell(1, 4).Value = "Serie";
+                    worksheet.Cell(1, 1).Value = "FILIAL";
+                    worksheet.Cell(1, 2).Value = "DESTINO";
+                    worksheet.Cell(1, 3).Value = "NF SAÍDA";
+                    worksheet.Cell(1, 4).Value = "SÉRIE";
                     worksheet.Cell(1, 5).Value = "CFOP";
-                    worksheet.Cell(1, 6).Value = "Emissão";
-                    worksheet.Cell(1, 7).Value = "Valor Contábil";
-                    worksheet.Cell(1, 8).Value = "Base Imposto";
-                    worksheet.Cell(1, 9).Value = "Alíquota";
-                    worksheet.Cell(1, 10).Value = "Valor ICMS";
-                    worksheet.Cell(1, 11).Value = "Chave NFE";
+                    worksheet.Cell(1, 6).Value = "EMISSÃO";
+                    worksheet.Cell(1, 7).Value = "VALOR CONTÁBIL";
+                    worksheet.Cell(1, 8).Value = "BASE IMPOSTO";
+                    worksheet.Cell(1, 9).Value = "ALÍQUOTA";
+                    worksheet.Cell(1, 10).Value = "VALOR ICMS";
+                    worksheet.Cell(1, 11).Value = "CHAVE NFE";
 
                     // Add data
                     for (int i = 0; i < saidas.Count; i++)

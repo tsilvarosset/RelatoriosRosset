@@ -74,9 +74,9 @@ namespace RelatoriosRosset.Controllers
                     var worksheet = workbook.Worksheets.Add("Vendas");
 
                     // Adicionar cabeçalhos
-                    worksheet.Cell(1, 1).Value = "Data da Venda";
-                    worksheet.Cell(1, 2).Value = "Filial";
-                    worksheet.Cell(1, 3).Value = "Valor";
+                    worksheet.Cell(1, 1).Value = "DATA DA VENDA";
+                    worksheet.Cell(1, 2).Value = "FILIAL";
+                    worksheet.Cell(1, 3).Value = "VALOR";
 
                     // Adicionar dados
                     for (int i = 0; i < lojaVendas.Count; i++)

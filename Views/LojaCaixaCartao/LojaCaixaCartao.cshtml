@@ -1,0 +1,74 @@
+﻿@model List<RelatoriosRosset.Models.LojaCaixaCartaoModel>
+@{
+    ViewData["Title"] = "Vendas com Cartão";
+    var dataInicial = ViewBag.DataInicio ?? DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd");
+    var dataFinal = ViewBag.DataFim ?? DateTime.Today.ToString("yyyy-MM-dd");
+    // var filialSelecionada = ViewBag.FilialSelecionada;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="LojaCaixaCartao" method="get">
+    <div class="form-group mb-3">
+        <label for="dataInicio" class="form-label">Data Inicial:</label>
+        <input type="date" class="form-control" id="dataInicio" name="dataInicio" />
+    </div>
+    <div class="form-group mb-3">
+        <label for="dataFim" class="form-label">Data Final:</label>
+        <input type="date" class="form-control" id="dataFim" name="dataFim" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+    <a asp-action="ExportarExcel"
+       asp-route-dataInicio="@ViewBag.DataInicio"
+       asp-route-dataFim="@ViewBag.DataFim"
+       class="btn btn-success">Exportar Excel</a>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>CÓDIGO FILIAL</th>
+                <th>FILIAL</th>
+                <th>VENDEDOR</th>
+                <th>TICKET</th>
+                <th>DATA VENDA</th>
+                <th>VALOR ORIGINAL</th>
+                <th>VALOR A RECEBER</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CODIGO_FILIAL</td>
+                    <td>@item.FILIAL</td>
+                    <td>@item.VENDEDOR</td>
+                    <td>@item.TICKET</td>
+                    <td>@item.DATA_VENDA</td>
+                    <td>@item.VALOR_ORIGINAL</td>
+                    <td>@item.VALOR_A_RECEBER</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (ViewBag.DataInicio != null && ViewBag.DataFim != null)
+{
+    <p class="mt-4">Nenhum registro encontrado para os filtros selecionados.</p>
+}
+
+@section Scripts {
+    <script>
+        document.querySelector('form[method="get"]').addEventListener('submit', function (e) {
+            const dataInicio = new Date(document.getElementById('dataInicio').value);
+            const dataFim = new Date(document.getElementById('dataFim').value);
+            if (dataFim < dataInicio) {
+                e.preventDefault();
+                alert('A data final não pode ser anterior à data inicial.');
+            }
+        });
+    </script>
+}

@@ -1,11 +1,11 @@
-﻿@model IEnumerable<RelatoriosRosset.Models.LojaVendaModel>
+﻿@model IEnumerable<RelatoriosRosset.Models.VendasOmniPModel>
 @{
     ViewData["Title"] = "Pesquisa de Vendas";
 }
 
 <h2>Pesquisa de Vendas</h2>
 
-<form asp-action="LojaVenda" method="get" class="mb-4">
+<form asp-action="VendasOmniP" method="get" class="mb-4">
     <div class="row">
         <div class="col-md-4">
             <label for="dataInicio">Data Início</label>
@@ -33,20 +33,24 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                @* <th>ID</th> *@
-                <th>DATA DA VENDA</th>
+                <th>CODIGO FILIAL</th>
                 <th>FILIAL</th>
+                <th>DATA VENDA</th>
                 <th>VALOR PAGO</th>
+                <th>CLIENTE VAREJO</th>
+                <th>CPF CGC</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var venda in Model)
             {
                 <tr>
-                    @* <td>@venda.Id</td> *@
-                    <td>@venda.DATA_VENDA.ToString("dd/MM/yyyy")</td>
+                    <td>@venda.CODIGO_FILIAL</td>
                     <td>@venda.FILIAL</td>
+                    <td>@venda.DATA_VENDA.ToString("dd/MM/yyyy")</td>
                     <td>@venda.VALOR_PAGO</td>
+                    <td>@venda.CLIENTE_VAREJO</td>
+                    <td>@venda.CPF_CGC</td>
                 </tr>
             }
         </tbody>
