@@ -27,27 +27,35 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="comercialDropdown">
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="LojaVendaF" asp-action="LojaVendaF">Consulta de Vendas Diária Franquias</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="VendasProdutos" asp-action="VendasProdutos">Consulta de Vendas Por Produtos Próprias</a>
+
+                                    <a class="dropdown-item" asp-area="" asp-controller="VendasProdutosF" asp-action="VendasProdutosF">Consulta de Vendas Por Produtos Franquias</a>
 
                                     <a class="dropdown-item" asp-area="" asp-controller="LojaVenda" asp-action="LojaVenda">Consulta de Vendas Diária Próprias</a>
+
+                                    <a class="dropdown-item" asp-area="" asp-controller="LojaVendaF" asp-action="LojaVendaF">Consulta de Vendas Diária Franquias</a>
 
                                     <a class="dropdown-item" asp-area="" asp-controller="VendasOmniP" asp-action="VendasOmniP">Consulta de Vendas Omni Próprias</a>
 
                                     <a class="dropdown-item" asp-area="" asp-controller="VendasOmniF" asp-action="VendasOmniF">Consulta de Vendas Omni Franquias</a>
 
-                                    <a class="dropdown-item" asp-area="" asp-controller="FiliaisAtivasF" asp-action="FiliaisAtivasF">Lojas Ativas Franquias</a>
-
                                     <a class="dropdown-item" asp-area="" asp-controller="FiliaisAtivasP" asp-action="FiliaisAtivasP">Lojas Ativas Próprias</a>
 
-                                    <a class="dropdown-item" asp-area="" asp-controller="NotasDevF" asp-action="NotasDevF">Notas de Devolução Franquias</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="FiliaisAtivasF" asp-action="FiliaisAtivasF">Lojas Ativas Franquias</a>
 
                                     <a class="dropdown-item" asp-area="" asp-controller="NotasDevP" asp-action="NotasDevP">Notas de Devolução Próprias</a>
 
+                                    <a class="dropdown-item" asp-area="" asp-controller="NotasDevF" asp-action="NotasDevF">Notas de Devolução Franquias</a>
+
+                                    <a class="dropdown-item" asp-area="" asp-controller="NotasVendasOmniP" asp-action="NotasVendasOmniP">Notas de Venda Omni Próprias</a>
+
+                                    <a class="dropdown-item" asp-area="" asp-controller="NotasVendasOmniF" asp-action="NotasVendasOmniF">Notas de Venda Omni Franquias</a>
+
                                     <a class="dropdown-item" asp-area="" asp-controller="EANPorSaida" asp-action="EANPorSaida">Gera EANs Por Saídas</a>
 
-                                    <a class="dropdown-item" asp-area="" asp-controller="GeraCargaFranquias" asp-action="GeraCargaFranquias">Gera Carga Para Inventário Franquias</a>
-
                                     <a class="dropdown-item" asp-area="" asp-controller="GeraCargaProprias" asp-action="GeraCargaProprias">Gera Carga Para Inventário Próprias</a>
+
+                                    <a class="dropdown-item" asp-area="" asp-controller="GeraCargaFranquias" asp-action="GeraCargaFranquias">Gera Carga Para Inventário Franquias</a>
 
                                 </li>
                             </ul>
@@ -63,7 +71,9 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="comercialDropdown">
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="EstoqueEAN" asp-action="EstoqueEAN">Consulta de Estoque por EAN</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="EstoqueEAN" asp-action="EstoqueEAN">Consulta de Estoque (EAN)</a>
+
+                                    <a class="dropdown-item" asp-area="" asp-controller="EstoqueEANLojas" asp-action="EstoqueEANLojas">Consulta de Estoque por Loja (EAN)</a>
 
                                     <a class="dropdown-item" asp-area="" asp-controller="CustoLojas" asp-action="Index">Custo EAN por Loja</a>
 

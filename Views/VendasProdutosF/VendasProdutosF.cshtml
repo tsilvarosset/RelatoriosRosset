@@ -1,0 +1,85 @@
+﻿@model IEnumerable<RelatoriosRosset.Models.VendasProdutosFModel>
+@{
+    ViewData["Title"] = "Pesquisa de Vendas";
+}
+
+<h2>Pesquisa de Vendas</h2>
+
+<form asp-action="VendasProdutosF" method="get" class="mb-4">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="dataInicio">Data Início</label>
+            <input type="date" name="dataInicio" class="form-control"
+                   value="@(ViewBag.DataInicio?.ToString("yyyy-MM-dd"))" />
+        </div>
+        <div class="col-md-4">
+            <label for="dataFim">Data Fim</label>
+            <input type="date" name="dataFim" class="form-control"
+                   value="@(ViewBag.DataFim?.ToString("yyyy-MM-dd"))" />
+        </div>
+        <div class="col-md-4 align-self-end">
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+
+            <a asp-action="ExportarExcel" asp-route-dataInicio="@ViewBag.DataInicio?.ToString("yyyy-MM-dd")"
+               asp-route-dataFim="@ViewBag.DataFim?.ToString("yyyy-MM-dd")"
+               class="btn btn-success">Gerar Relatório em Excel</a>
+
+        </div>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>CODIGO FILIAL</th>
+                <th>FILIAL</th>
+                <th>DATA VENDA</th>
+                <th>PRODUTO</th>
+                <th>COR PRODUTO</th>
+                <th>TAMANHO</th>
+                <th>CODIGO BARRA</th>
+                <th>QTDE VENDIDA</th>
+                <th>PRECO</th>
+                <th>QTDE TICKETS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var venda in Model)
+            {
+                <tr>
+                    <td>@venda.CODIGO_FILIAL</td>
+                    <td>@venda.FILIAL</td>
+                    <td>@venda.DATA_VENDA.ToString("dd/MM/yyyy")</td>
+                    <td>@venda.PRODUTO</td>
+                    <td>@venda.COR_PRODUTO</td>
+                    <td>@venda.TAMANHO</td>
+                    <td>@venda.CODIGO_BARRA</td>
+                    <td>@venda.QTDE_VENDIDA</td>
+                    <td>@venda.PRECO_LIQUIDO</td>
+                    <td>@venda.QTDE_TICKETS</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nenhuma venda encontrada para o período selecionado.</p>
+}
+
+@section Scripts {
+    <script>
+        // Opcional: Adicionar validação client-side para garantir que dataFim seja maior que dataInicio
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const dataInicio = document.querySelector('[name="dataInicio"]').value;
+            const dataFim = document.querySelector('[name="dataFim"]').value;
+
+            if (dataInicio && dataFim && new Date(dataFim) < new Date(dataInicio)) {
+                e.preventDefault();
+                alert('A data final deve ser maior ou igual à data inicial.');
+            }
+        });
+    </script>
+}

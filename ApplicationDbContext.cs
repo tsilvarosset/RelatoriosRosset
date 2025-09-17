@@ -38,6 +38,11 @@ namespace RelatoriosRosset
             modelBuilder.Entity<LojaCaixaCartaoModel>().HasNoKey();
             modelBuilder.Entity<VendasOmniPModel>().HasNoKey();
             modelBuilder.Entity<VendasOmniFModel>().HasNoKey();
+            modelBuilder.Entity<VendasProdutosModel>().HasNoKey();
+            modelBuilder.Entity<VendasProdutosFModel>().HasNoKey();
+            modelBuilder.Entity<NotasVendasOmniFModel>().HasNoKey();
+            modelBuilder.Entity<NotasVendasOmniPModel>().HasNoKey();
+            modelBuilder.Entity<EstoqueEANLojasModel>().HasNoKey();
         }
 
 
@@ -70,6 +75,11 @@ namespace RelatoriosRosset
         public DbSet<LojaCaixaCartaoModel> V_LANCAMENTOS_CAIXA_CARTAO { get; set; }
         public DbSet<VendasOmniPModel> V_VENDAS_OMNI_P { get; set; }
         public DbSet<VendasOmniFModel> V_VENDAS_OMNI_F { get; set; }
+        public DbSet<VendasProdutosModel> V_VENDAS_PRODUTOS_P { get; set; }
+        public DbSet<VendasProdutosFModel> V_VENDAS_PRODUTOS_F { get; set; }
+        public DbSet<NotasVendasOmniFModel> NOTAS_VENDAS_FRANQUIAS { get; set; }
+        public DbSet<NotasVendasOmniPModel> NOTAS_VENDAS_PROPRIAS { get; set; }
+        public DbSet<EstoqueEANLojasModel> TABELA_ESTOQUE_EAN_LOJA { get; set; }
 
     }
 
