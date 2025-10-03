@@ -43,6 +43,9 @@ namespace RelatoriosRosset
             modelBuilder.Entity<NotasVendasOmniFModel>().HasNoKey();
             modelBuilder.Entity<NotasVendasOmniPModel>().HasNoKey();
             modelBuilder.Entity<EstoqueEANLojasModel>().HasNoKey();
+            modelBuilder.Entity<DevEntradasModel>().HasNoKey();
+            modelBuilder.Entity<DescontosPModel>().HasNoKey();
+            modelBuilder.Entity<DescontosFModel>().HasNoKey();
         }
 
 
@@ -80,6 +83,9 @@ namespace RelatoriosRosset
         public DbSet<NotasVendasOmniFModel> NOTAS_VENDAS_FRANQUIAS { get; set; }
         public DbSet<NotasVendasOmniPModel> NOTAS_VENDAS_PROPRIAS { get; set; }
         public DbSet<EstoqueEANLojasModel> TABELA_ESTOQUE_EAN_LOJA { get; set; }
+        public DbSet<DevEntradasModel> V_DEVOLUCOES_ORIGENS { get; set; }
+        public DbSet<DescontosPModel> V_DESCONTOS_PROPRIAS { get; set; }
+        public DbSet<DescontosFModel> V_DESCONTOS_FRANQUIAS { get; set; }
 
     }
 

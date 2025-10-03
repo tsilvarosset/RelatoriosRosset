@@ -1,0 +1,49 @@
+﻿@model IEnumerable<RelatoriosRosset.Models.DescontosPModel>
+@{
+    ViewData["Title"] = "Descontos Liberados Lojas Próprias";
+}
+
+<h2>Descontos Liberados Lojas Próprias</h2>
+
+<form asp-action="DescontosP" method="get" class="mb-4">
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>COD_FILIAL</th>
+                <th>FILIAL</th>
+                <th>OPERACAO VENDA</th>
+                <th>LIMITE DESCONTO</th>
+                <th>LIMITE DESCONTO GERENTE</th>
+                <th>LIMITE DESCONTO ITEM</th>
+                <th>LIMITE DESCONTO ITEM GERENTE</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loja in Model)
+            {
+                <tr>
+                    <td>@loja.COD_FILIAL</td>
+                    <td>@loja.FILIAL</td>
+                    <td>@loja.OPERACAO_VENDA</td>
+                    <td>@loja.LIMITE_DESCONTO</td>
+                    <td>@loja.LIMITE_DESCONTO_GERENTE</td>
+                    <td>@loja.LIMITE_DESCONTO_ITEM</td>
+                    <td>@loja.LIMITE_DESCONTO_ITEM_GERENTE</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nenhuma loja encontrada.</p>
+}
+
+
+
+

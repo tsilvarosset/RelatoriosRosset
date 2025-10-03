@@ -1,0 +1,84 @@
+﻿@model IEnumerable<RelatoriosRosset.Models.DevEntradasModel>
+@{
+    ViewData["Title"] = "Origens das Devoluções";
+}
+
+<h2>Origens das Devoluções</h2>
+
+<form asp-action="DevEntradas" method="get" class="mb-4">
+    <div class="row">
+        <div class="col-md-3">
+            <label for="dataInicio">Data Início</label>
+            <input type="date" name="dataInicio" class="form-control"
+                   value="@(ViewBag.DataInicio?.ToString("yyyy-MM-dd"))" />
+        </div>
+        <div class="col-md-3">
+            <label for="dataFim">Data Fim</label>
+            <input type="date" name="dataFim" class="form-control"
+                   value="@(ViewBag.DataFim?.ToString("yyyy-MM-dd"))" />
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12 text-end">
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+
+            <a asp-action="ExportarExcel"
+               asp-route-dataInicio="@ViewBag.DataInicio?.ToString("yyyy-MM-dd")"
+               asp-route-dataFim="@ViewBag.DataFim?.ToString("yyyy-MM-dd")"
+               class="btn btn-success">Gerar Relatório em Excel</a>
+        </div>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>CODIGO FILIAL</th>
+                <th>FILIAL</th>
+                <th>EMISSAO</th>
+                <th>NF DEVOLUCAO</th>
+                <th>ENTRADA ORIGEM</th>
+                <th>CHAVE DEVOLUCAO</th>
+                <th>CHAVE ENTRADA</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var nota in Model)
+            {
+                <tr>
+
+                    <td>@nota.CODIGO_FILIAL</td>
+                    <td>@nota.FILIAL</td>
+                    <td>@nota.EMISSAO</td>
+                    <td>@nota.NF_DEVOLUCAO</td>
+                    <td>@nota.ENTRADA_ORIGEM</td>
+                    <td>@nota.CHAVE_DEVOLUCAO</td>
+                    <td>@nota.CHAVE_ENTRADA</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nenhuma nota encontrada para o período selecionado.</p>
+}
+
+@section Scripts {
+    <script>
+        // Opcional: Adicionar validação client-side para garantir que dataFim seja maior que dataInicio
+        document.querySelector('form').addEventListener('submit', function (e) {
+            const dataInicio = document.querySelector('[name="dataInicio"]').value;
+            const dataFim = document.querySelector('[name="dataFim"]').value;
+
+            if (dataInicio && dataFim && new Date(dataFim) < new Date(dataInicio)) {
+                e.preventDefault();
+                alert('A data final deve ser maior ou igual à data inicial.');
+            }
+        });
+    </script>
+}

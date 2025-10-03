@@ -86,7 +86,7 @@ namespace RelatoriosRosset.Controllers
                     SELECT
                         TRY_CAST(ITEM AS INT) AS Item,
                         DESC_ITEM_COMPOSICAO AS DescItemComposicao,
-                        TRY_CAST(ITEM_COMPOSICAO AS INT) AS ItemComposicao,
+                        ITEM_COMPOSICAO AS ItemComposicao,
                         PRODUTO AS Produto,
                         COR_PRODUTO AS CorProduto,
                         GRADE AS Grade,
@@ -109,7 +109,7 @@ namespace RelatoriosRosset.Controllers
                         VALOR_BRUTO AS ValorBrut
                     FROM TABELA_CUSTO_EAN_MATRIZ
                     WHERE TRY_CAST(ITEM AS INT) IS NOT NULL
-                        AND TRY_CAST(ITEM_COMPOSICAO AS INT) IS NOT NULL ORDER BY FILIAL, PRODUTO ";
+                        ORDER BY FILIAL, PRODUTO ";
 
                 using var reader = await command.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
@@ -118,7 +118,7 @@ namespace RelatoriosRosset.Controllers
                     {
                         Item = reader.IsDBNull(0) ? null : reader.GetInt32(0),
                         DescItemComposicao = reader.IsDBNull(1) ? null : reader.GetString(1),
-                        ItemComposicao = reader.IsDBNull(2) ? null : reader.GetInt32(2),
+                        ItemComposicao = reader.IsDBNull(2) ? null : reader.GetString(2),
                         Produto = reader.IsDBNull(3) ? null : reader.GetString(3),
                         CorProduto = reader.IsDBNull(4) ? null : reader.GetString(4),
                         Grade = reader.IsDBNull(5) ? null : reader.GetString(5),
@@ -210,7 +210,7 @@ namespace RelatoriosRosset.Controllers
 
                 // Apply number formatting
                 worksheet.Column(1).Style.NumberFormat.Format = "0"; // Item
-                worksheet.Column(3).Style.NumberFormat.Format = "0"; // ItemComposicao
+                //worksheet.Column(3).Style.NumberFormat.Format = "0"; // ItemComposicao
                 worksheet.Column(8).Style.NumberFormat.Format = "0"; // Qtde
                 worksheet.Column(18).Style.NumberFormat.Format = "0"; // TotalQtde
                 worksheet.Column(9).Style.NumberFormat.Format = "#,##0.00"; // ValorCusto

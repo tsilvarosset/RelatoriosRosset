@@ -5,7 +5,7 @@
     {
         public int? Item { get; set; }
         public string DescItemComposicao { get; set; }
-        public int? ItemComposicao { get; set; }
+        public string? ItemComposicao { get; set; }
         public string Produto { get; set; }
         public string CorProduto { get; set; }
         public string Grade { get; set; }
