@@ -34,6 +34,7 @@ namespace RelatoriosRosset.Controllers
                         FILIAL = V.FILIAL,
                         EMISSAO = V.EMISSAO,
                         NF_DEVOLUCAO = V.NF_DEVOLUCAO,
+                        VALOR = V.VALOR,
                         ENTRADA_ORIGEM = V.ENTRADA_ORIGEM,
                         CHAVE_DEVOLUCAO = V.CHAVE_DEVOLUCAO,
                         CHAVE_ENTRADA = V.CHAVE_ENTRADA
@@ -71,6 +72,7 @@ namespace RelatoriosRosset.Controllers
                         FILIAL = V.FILIAL,
                         EMISSAO = V.EMISSAO,
                         NF_DEVOLUCAO = V.NF_DEVOLUCAO,
+                        VALOR = V.VALOR,
                         ENTRADA_ORIGEM = V.ENTRADA_ORIGEM,
                         CHAVE_DEVOLUCAO = V.CHAVE_DEVOLUCAO,
                         CHAVE_ENTRADA = V.CHAVE_ENTRADA
@@ -91,9 +93,10 @@ namespace RelatoriosRosset.Controllers
                     worksheet.Cell(1, 2).Value = "FILIAL";
                     worksheet.Cell(1, 3).Value = "EMISSAO";
                     worksheet.Cell(1, 4).Value = "NF_DEVOLUCAO";
-                    worksheet.Cell(1, 5).Value = "ENTRADA_ORIGEM";
-                    worksheet.Cell(1, 6).Value = "CHAVE_DEVOLUCAO";
-                    worksheet.Cell(1, 7).Value = "CHAVE_ENTRADA";
+                    worksheet.Cell(1, 5).Value = "VALOR";
+                    worksheet.Cell(1, 6).Value = "ENTRADA_ORIGEM";
+                    worksheet.Cell(1, 7).Value = "CHAVE_DEVOLUCAO";
+                    worksheet.Cell(1, 8).Value = "CHAVE_ENTRADA";
 
                     // Dados
                     for (int i = 0; i < notas.Count; i++)
@@ -102,9 +105,10 @@ namespace RelatoriosRosset.Controllers
                         worksheet.Cell(i + 2, 2).Value = notas[i].FILIAL;
                         worksheet.Cell(i + 2, 3).Value = notas[i].EMISSAO;
                         worksheet.Cell(i + 2, 4).Value = notas[i].NF_DEVOLUCAO;
-                        worksheet.Cell(i + 2, 5).Value = notas[i].ENTRADA_ORIGEM;
-                        worksheet.Cell(i + 2, 6).Value = notas[i].CHAVE_DEVOLUCAO;
-                        worksheet.Cell(i + 2, 7).Value = notas[i].CHAVE_ENTRADA;
+                        worksheet.Cell(i + 2, 5).Value = notas[i].VALOR;
+                        worksheet.Cell(i + 2, 6).Value = notas[i].ENTRADA_ORIGEM;
+                        worksheet.Cell(i + 2, 7).Value = notas[i].CHAVE_DEVOLUCAO;
+                        worksheet.Cell(i + 2, 8).Value = notas[i].CHAVE_ENTRADA;
 
                     }
 
