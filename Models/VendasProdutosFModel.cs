@@ -12,5 +12,6 @@
         public int QTDE_VENDIDA { get; set; }
         public Decimal PRECO_LIQUIDO { get; set; }
         public int QTDE_TICKETS { get; set; }
+        public string NOME_VENDEDOR { get; set; }
     }
 }

@@ -46,6 +46,10 @@ namespace RelatoriosRosset
             modelBuilder.Entity<DevEntradasModel>().HasNoKey();
             modelBuilder.Entity<DescontosPModel>().HasNoKey();
             modelBuilder.Entity<DescontosFModel>().HasNoKey();
+            modelBuilder.Entity<Registro54Result>().HasNoKey();
+            modelBuilder.Entity<PedidosGradeModel>().HasNoKey();
+            modelBuilder.Entity<SeniorModel>().HasNoKey();
+            modelBuilder.Entity<SeniorEntradasModel>().HasNoKey();
         }
 
 
@@ -86,6 +90,11 @@ namespace RelatoriosRosset
         public DbSet<DevEntradasModel> V_DEVOLUCOES_ORIGENS { get; set; }
         public DbSet<DescontosPModel> V_DESCONTOS_PROPRIAS { get; set; }
         public DbSet<DescontosFModel> V_DESCONTOS_FRANQUIAS { get; set; }
+        public DbSet<Registro54Result> Registro54 { get; set; }
+        public DbSet<PedidosGradeModel> PEDIDOS_GRADE { get; set; }
+        public DbSet<SeniorModel> TABELA_SAIDAS_SENIOR { get; set; }
+        public DbSet<SeniorEntradasModel> TABELA_ENTRADAS_SENIOR { get; set; }
+
 
     }
 

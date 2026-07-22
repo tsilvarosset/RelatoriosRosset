@@ -63,7 +63,7 @@ namespace RelatoriosRosset.Controllers
                 await connection.OpenAsync();
 
                 using var command = connection.CreateCommand();
-                command.CommandTimeout = 120;
+                command.CommandTimeout = 120000000;
                 command.CommandText = "EXEC GERA_SAIDA_POR_EAN @DataInicial, @DataFinal, @FilialOrigem, @FilialDestino";
                 command.Parameters.Add(new SqlParameter("@DataInicial", SqlDbType.Date) { Value = dataInicial });
                 command.Parameters.Add(new SqlParameter("@DataFinal", SqlDbType.Date) { Value = dataFinal });

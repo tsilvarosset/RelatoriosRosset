@@ -1,11 +1,12 @@
-﻿@model IEnumerable<RelatoriosRosset.Models.VendasProdutosFModel>
+﻿@model IEnumerable<RelatoriosRosset.Models.SeniorModel>
+
 @{
-    ViewData["Title"] = "Pesquisa de Vendas";
+    ViewData["Title"] = "Pesquisa de Saidas";
 }
 
-<h2>Pesquisa de Vendas</h2>
+<h2>Pesquisa de Saídas</h2>
 
-<form asp-action="VendasProdutosF" method="get" class="mb-4">
+<form asp-action="ExecutarProcedureSenior" method="get" class="mb-4">
     <div class="row">
         <div class="col-md-4">
             <label for="dataInicio">Data Início</label>
@@ -19,11 +20,9 @@
         </div>
         <div class="col-md-4 align-self-end">
             <button type="submit" class="btn btn-primary">Pesquisar</button>
-
             <a asp-action="ExportarExcel" asp-route-dataInicio="@ViewBag.DataInicio?.ToString("yyyy-MM-dd")"
                asp-route-dataFim="@ViewBag.DataFim?.ToString("yyyy-MM-dd")"
                class="btn btn-success">Gerar Relatório em Excel</a>
-
         </div>
     </div>
 </form>
@@ -33,34 +32,47 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th>CHAVE NFE</th>
                 <th>CODIGO FILIAL</th>
-                <th>FILIAL</th>
-                <th>DATA VENDA</th>
-                <th>PRODUTO</th>
-                <th>COR PRODUTO</th>
-                <th>TAMANHO</th>
-                <th>CODIGO BARRA</th>
-                <th>QTDE VENDIDA</th>
-                <th>PRECO</th>
-                <th>QTDE TICKETS</th>
-                <th>NOME VENDEDOR</th>
+                <th>NOTA</th>
+                <th>SÉRIE</th>
+                <th>EMISSAO</th>
+                <th>CFOP</th>
+                <th>VALOR_CONTABIL</th>
+                <th>BASE_ICMS</th>
+                <th>IMPOSTO_ICMS</th>
+                <th>BASE_IPI</th>
+                <th>IMPOSTO_IPI</th>
+                <th>BASE_PIS</th>
+                <th>IMPOSTO_PIS</th>
+                <th>BASE_COFINS</th>
+                <th>IMPOSTO_COFINS</th>
+                <th>BASE_FCP</th>
+                <th>IMPOSTO_FCP</th>
+
             </tr>
         </thead>
         <tbody>
-            @foreach (var venda in Model)
+            @foreach (var saidas in Model)
             {
                 <tr>
-                    <td>@venda.CODIGO_FILIAL</td>
-                    <td>@venda.FILIAL</td>
-                    <td>@venda.DATA_VENDA.ToString("dd/MM/yyyy")</td>
-                    <td>@venda.PRODUTO</td>
-                    <td>@venda.COR_PRODUTO</td>
-                    <td>@venda.TAMANHO</td>
-                    <td>@venda.CODIGO_BARRA</td>
-                    <td>@venda.QTDE_VENDIDA</td>
-                    <td>@venda.PRECO_LIQUIDO</td>
-                    <td>@venda.QTDE_TICKETS</td>
-                    <td>@venda.NOME_VENDEDOR</td>
+                    <td>@saidas.CHAVE_NFE</td>
+                    <td>@saidas.CODIGO_FILIAL</td>
+                    <td>@saidas.NOTA</td>
+                    <td>@saidas.SERIE</td>
+                    <td>@saidas.EMISSAO.ToString("dd/MM/yyyy")</td>
+                    <td>@saidas.CFOP</td>
+                    <td>@saidas.VALOR_CONTABIL</td>
+                    <td>@saidas.BASE_ICMS</td>
+                    <td>@saidas.IMPOSTO_ICMS</td>
+                    <td>@saidas.BASE_IPI</td>
+                    <td>@saidas.IMPOSTO_IPI</td>
+                    <td>@saidas.BASE_PIS</td>
+                    <td>@saidas.IMPOSTO_PIS</td>
+                    <td>@saidas.BASE_COFINS</td>
+                    <td>@saidas.IMPOSTO_COFINS</td>
+                    <td>@saidas.BASE_FCP</td>
+                    <td>@saidas.IMPOSTO_FCP</td>
                 </tr>
             }
         </tbody>
@@ -68,16 +80,14 @@
 }
 else
 {
-    <p>Nenhuma venda encontrada para o período selecionado.</p>
+    <p>Nenhuma saida encontrada para o período selecionado.</p>
 }
 
 @section Scripts {
     <script>
-        // Opcional: Adicionar validação client-side para garantir que dataFim seja maior que dataInicio
         document.querySelector('form').addEventListener('submit', function(e) {
             const dataInicio = document.querySelector('[name="dataInicio"]').value;
             const dataFim = document.querySelector('[name="dataFim"]').value;
-
             if (dataInicio && dataFim && new Date(dataFim) < new Date(dataInicio)) {
                 e.preventDefault();
                 alert('A data final deve ser maior ou igual à data inicial.');

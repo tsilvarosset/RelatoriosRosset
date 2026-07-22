@@ -85,6 +85,7 @@ namespace RelatoriosRosset.Controllers
                     worksheet.Cell(1, 8).Value = "QTDE VENDIDA";
                     worksheet.Cell(1, 9).Value = "PRECO LIQUIDO";
                     worksheet.Cell(1, 10).Value = "QTDE TICKETS";
+                    worksheet.Cell(1, 11).Value = "NOME VENDEDOR";
 
                     // Adicionar dados
                     for (int i = 0; i < lojaVendas.Count; i++)
@@ -99,6 +100,7 @@ namespace RelatoriosRosset.Controllers
                         worksheet.Cell(i + 2, 8).Value = lojaVendas[i].QTDE_VENDIDA;
                         worksheet.Cell(i + 2, 9).Value = lojaVendas[i].PRECO_LIQUIDO;
                         worksheet.Cell(i + 2, 10).Value = lojaVendas[i].QTDE_TICKETS;
+                        worksheet.Cell(i + 2, 11).Value = lojaVendas[i].NOME_VENDEDOR;
                     }
 
                     // Ajustar formato das colunas
