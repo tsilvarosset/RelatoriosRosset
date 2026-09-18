@@ -8,6 +8,8 @@
         public string PRODUTO { get; set; }
         public string COR_PRODUTO { get; set; }
         public string TAMANHO { get; set; }
+        public string COLECAO { get; set; }
+        public string DESC_COLECAO { get; set; }
         public int? QTDE { get; set; }
         public Decimal? VALOR_UNITARIO { get; set; }
         public Decimal? VALOR_PEDIDO { get; set; }

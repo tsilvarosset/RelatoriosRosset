@@ -82,9 +82,11 @@ namespace RelatoriosRosset.Controllers
                     worksheet.Cell(1, 5).Value = "COR PRODUTO";
                     worksheet.Cell(1, 6).Value = "TAMANHO";
                     worksheet.Cell(1, 7).Value = "QTDE";
-                    worksheet.Cell(1, 8).Value = "VALOR UNITARIO";
-                    worksheet.Cell(1, 9).Value = "VALOR PEDIDO";
-                    worksheet.Cell(1, 10).Value = "EMISSAO";
+                    worksheet.Cell(1, 8).Value = "COLECAO";
+                    worksheet.Cell(1, 9).Value = "DESC_COLECAO";
+                    worksheet.Cell(1, 10).Value = "VALOR UNITARIO";
+                    worksheet.Cell(1, 11).Value = "VALOR PEDIDO";
+                    worksheet.Cell(1, 12).Value = "EMISSAO";
 
                     // Adicionar dados
                     for (int i = 0; i < pedido.Count; i++)
@@ -96,9 +98,11 @@ namespace RelatoriosRosset.Controllers
                         worksheet.Cell(i + 2, 5).Value = pedido[i].COR_PRODUTO;
                         worksheet.Cell(i + 2, 6).Value = pedido[i].TAMANHO;
                         worksheet.Cell(i + 2, 7).Value = pedido[i].QTDE;
-                        worksheet.Cell(i + 2, 8).Value = pedido[i].VALOR_UNITARIO;
-                        worksheet.Cell(i + 2, 9).Value = pedido[i].VALOR_PEDIDO;
-                        worksheet.Cell(i + 2, 10).Value = pedido[i].EMISSAO.ToString("dd/MM/yyyy");
+                        worksheet.Cell(i + 2, 8).Value = pedido[i].COLECAO;
+                        worksheet.Cell(i + 2, 9).Value = pedido[i].DESC_COLECAO;
+                        worksheet.Cell(i + 2, 10).Value = pedido[i].VALOR_UNITARIO;
+                        worksheet.Cell(i + 2, 11).Value = pedido[i].VALOR_PEDIDO;
+                        worksheet.Cell(i + 2, 12).Value = pedido[i].EMISSAO.ToString("dd/MM/yyyy");
                     }
 
                     // Ajustar formato das colunas

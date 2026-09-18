@@ -50,6 +50,8 @@ namespace RelatoriosRosset
             modelBuilder.Entity<PedidosGradeModel>().HasNoKey();
             modelBuilder.Entity<SeniorModel>().HasNoKey();
             modelBuilder.Entity<SeniorEntradasModel>().HasNoKey();
+            modelBuilder.Entity<ProdutosAtivosModel>().HasNoKey();
+        
         }
 
 
@@ -58,7 +60,7 @@ namespace RelatoriosRosset
             : base(options)
         {
             //Database.SetCommandTimeout(12000000); // Aumenta o timeout para 120 segundos
-            Database.SetCommandTimeout(300); // Timeout de 30 segundos
+            Database.SetCommandTimeout(6000); // Timeout de 30 segundos
         }
 
         public DbSet<LojaVendaModel> V_VENDAS_PROPRIAS { get; set; }
@@ -94,6 +96,7 @@ namespace RelatoriosRosset
         public DbSet<PedidosGradeModel> PEDIDOS_GRADE { get; set; }
         public DbSet<SeniorModel> TABELA_SAIDAS_SENIOR { get; set; }
         public DbSet<SeniorEntradasModel> TABELA_ENTRADAS_SENIOR { get; set; }
+        public DbSet<ProdutosAtivosModel> V_PRODUTOS_ATIVOS { get; set; }
 
 
     }

@@ -1,0 +1,45 @@
+﻿@model List<RelatoriosRosset.Models.ProdutosAtivosModel>
+@{
+    ViewData["Title"] = "Produtos Ativos";
+    
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="ProdutosAtivos" method="get">
+ 
+    <a asp-action="ExportarExcel"
+       
+       class="btn btn-success">Exportar Excel</a>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>PRODUTO</th>
+                <th>DESC PRODUTO</th>
+                <th>COR PRODUTO</th>
+                <th>CODIGO BARRA</th>
+                <th>GRADE</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.PRODUTO</td>
+                    <td>@item.DESC_PRODUTO</td>
+                    <td>@item.COR_PRODUTO</td>
+                    <td>@item.CODIGO_BARRA</td>
+                    <td>@item.GRADE</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nenhuma loja encontrada.</p>
+}

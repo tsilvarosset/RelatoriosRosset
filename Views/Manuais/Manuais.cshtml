@@ -1,0 +1,98 @@
+﻿@model RelatoriosRosset.Models.Manuais
+@{
+    ViewData["Title"] = "Manuais Linx";
+}
+
+<h2 class="mb-3">Manuais Linx</h2>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        @for (var i = 0; i < Model.Trilha.Count; i++)
+        {
+            var item = Model.Trilha[i];
+            if (i == Model.Trilha.Count - 1)
+            {
+                <li class="breadcrumb-item active" aria-current="page">@item.Nome</li>
+            }
+            else
+            {
+                <li class="breadcrumb-item">
+                    <a asp-controller="Manuais" asp-action="Manuais" asp-route-pasta="@item.CaminhoRelativo">@item.Nome</a>
+                </li>
+            }
+        }
+    </ol>
+</nav>
+
+@if (ViewBag.Erro != null)
+{
+    <div class="alert alert-warning">@ViewBag.Erro</div>
+}
+else if (Model.Vazio)
+{
+    <div class="alert alert-info">Esta pasta não tem manuais no momento.</div>
+}
+else
+{
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th style="width: 150px;" class="text-end">Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.CaminhoPai != null)
+            {
+                <tr>
+                    <td colspan="2">
+                        <a asp-controller="Manuais" asp-action="Manuais" asp-route-pasta="@Model.CaminhoPai">
+                            &#8592; Voltar
+                        </a>
+                    </td>
+                </tr>
+            }
+
+            @foreach (var pasta in Model.Pastas)
+            {
+                <tr>
+                    <td>
+                        <span class="badge bg-secondary me-2">Pasta</span>
+                        <a class="fw-semibold text-decoration-none"
+                           asp-controller="Manuais"
+                           asp-action="Manuais"
+                           asp-route-pasta="@pasta.CaminhoRelativo">
+                            @pasta.Nome
+                        </a>
+                    </td>
+                    <td class="text-end">
+                        <a class="btn btn-sm btn-outline-secondary"
+                           asp-controller="Manuais"
+                           asp-action="Manuais"
+                           asp-route-pasta="@pasta.CaminhoRelativo">
+                            Abrir
+                        </a>
+                    </td>
+                </tr>
+            }
+
+            @foreach (var manual in Model.Arquivos)
+            {
+                <tr>
+                    <td>
+                        <span class="badge bg-danger me-2">PDF</span>
+                        @manual.Titulo
+                    </td>
+                    <td class="text-end">
+                        <a class="btn btn-sm btn-primary"
+                           asp-controller="Manuais"
+                           asp-action="Download"
+                           asp-route-arquivo="@manual.CaminhoRelativo">
+                            Baixar
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
